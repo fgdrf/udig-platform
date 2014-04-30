@@ -42,7 +42,7 @@ import org.opengis.filter.expression.Literal;
  * @since 1.2.0
  */
 public class GeoToolsTest {
-    
+
     @Ignore
     public void testGeoTools(){
          Version version = GeoTools.getVersion();
@@ -52,16 +52,16 @@ public class GeoToolsTest {
     @Test
     public void testSVGGraphicsFactory() throws Exception {
         URL url = GeoToolsTest.class.getResource("example.svg");
-        
+
         SVGGraphicFactory svgFactory = new SVGGraphicFactory();
         FilterFactory2 ff = CommonFactoryFinder.getFilterFactory2(null);
         Literal expr = ff.literal( url.toExternalForm() );
-        
+
         Icon icon = svgFactory.getIcon(null, expr, "image/svg",16 );
         assertNotNull( icon );
-        
+
     }
-    
+
     @Test
     public void testParseSVG() throws Exception {
         URL url = GeoToolsTest.class.getResource("example.svg");

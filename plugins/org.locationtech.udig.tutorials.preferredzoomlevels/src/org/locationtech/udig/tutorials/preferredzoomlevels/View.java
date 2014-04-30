@@ -29,7 +29,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.IStatusLineManager;
 
 /**
- * 
+ *
  * @version 1.3.0
  */
 public class View extends DefaultMapViewPart {
@@ -37,15 +37,15 @@ public class View extends DefaultMapViewPart {
     public static final String ID = "org.locationtech.udig.tutorials.preferredzoomlevels.view";
 
 	@Override
-	protected void createResources(List<IGeoResource> resources, 
+	protected void createResources(List<IGeoResource> resources,
 			IProgressMonitor monitor) throws IOException {
-		
+
 		@SuppressWarnings("nls")
         URL url = FileLocator.resolve(FileLocator.find(Activator.getDefault().getBundle(), new Path("data/face.shp"), Collections.emptyMap()));
 		IService r = CatalogPlugin.getDefault().getLocalCatalog().acquire(url, monitor);
 		resources.add(r.resources(monitor).get(0));
 	}
-	
+
 	@Override
 	protected void initMap(Map createdMap) {
 		TreeSet<Double> scales = new TreeSet<Double>();
@@ -68,5 +68,5 @@ public class View extends DefaultMapViewPart {
 	public IStatusLineManager getStatusLineManager() {
 		return getViewSite().getActionBars().getStatusLineManager();
 	}
-	
+
 }
