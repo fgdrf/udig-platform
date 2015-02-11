@@ -14,7 +14,7 @@
          </property>
          <property
                name="startupProgressRect"
-               value="0,196,500,8">
+               value="0,0,500,320">
          </property>
          <property
                name="startupMessageRect"
@@ -108,5 +108,16 @@
                value="uDig SDK">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="org.locationtech.udig.CopyRightSplashHandler"
+            id="org.locationtech.udig.product.splashId">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="org.locationtech.udig.product"
+            splashId="org.locationtech.udig.product.splashId">
+      </splashHandlerProductBinding>
    </extension>
 </plugin>

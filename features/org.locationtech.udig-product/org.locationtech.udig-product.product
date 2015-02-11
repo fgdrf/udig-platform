@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="uDig" uid="org.locationtech.udig-product" id="org.locationtech.udig.product" application="org.locationtech.udig.ui.application" version="2.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="uDig" uid="org.locationtech.udig.product" id="org.locationtech.udig.product" application="org.locationtech.udig.ui.application" version="2.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="./icons/about.png"/>
@@ -22,7 +22,7 @@
 
    <splash
       location="org.locationtech.udig"
-      startupProgressRect="0,196,500,8"
+      startupProgressRect="0,0,500,320"
       startupMessageRect="7,180,445,16"
       startupForegroundColor="FFFFFF" />
    <launcher name="udig_internal">
@@ -79,7 +79,7 @@ Content and such source code may be obtained at http://github.com/udig .
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="5" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
-      <property name="org.eclipse.update.reconcile" value="false"/>  
+      <property name="org.eclipse.update.reconcile" value="false" />
    </configurations>
 
 </product>
