@@ -1,8 +1,11 @@
 package org.locationtech.udig;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -43,12 +46,12 @@ public class CopyRightSplashHandler extends AbstractSplashHandler {
  
     private void doEventLoop() {
         // pause for 3 seconds so the text displays
-        try {
-            Display.getCurrent().update();
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            // nothing
-        }
+//        try {
+//            Display.getCurrent().update();
+////            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            // nothing
+//        }
     }
  
     private void createUI() {
@@ -61,27 +64,46 @@ public class CopyRightSplashHandler extends AbstractSplashHandler {
  
         // create a text panel positioned at the bottom center
         // of the splash screen graphic.
+        
+        
+        splash.setLayout(new FormLayout());
+        
         composite = new Composite(splash, SWT.NONE);
-        composite.setBackground(d.getSystemColor(SWT.COLOR_YELLOW));
+        FormData fd_composite = new FormData();
+        fd_composite.bottom = new FormAttachment(0, 290);
+        fd_composite.right = new FormAttachment(0, 440);
+        fd_composite.top = new FormAttachment(0, 10);
+        fd_composite.left = new FormAttachment(0, 10);
+        composite.setLayoutData(fd_composite);
+        composite.setLayout(new FillLayout(SWT.HORIZONTAL));
         
-        composite.setLayoutData(new GridData(GridData.FILL, GridData.FILL,
-                   true,true));
- 
-        composite.setLayout(new GridLayout(1, true));
- 
-        Composite innerComposite = new Composite(composite, SWT.NONE);
-        innerComposite.setBackground(d.getSystemColor(SWT.COLOR_RED));
+        Composite composite_1 = new Composite(composite, SWT.NONE);
         
-        innerComposite.setLayoutData(new GridData(GridData.FILL, GridData.BEGINNING,
-                   true,false));
-
-        Label l = new Label(innerComposite, SWT.NONE);
-        l.setText(getSplashText());
-        l.setForeground(d.getSystemColor(SWT.COLOR_DARK_GRAY));
+        Label udigLicenseLabel = new Label(composite_1, SWT.NONE);
+        udigLicenseLabel.setAlignment(SWT.CENTER);
+        udigLicenseLabel.setFont(new Font(d, "Lucida Grande", 10, SWT.ITALIC));
+        udigLicenseLabel.setBounds(0, 232, 430, 38);
+        udigLicenseLabel.setText("Dies ist freie Software, verfügbar unter der Eclipse Public License (EPL) und der\n"
+                + "Refractions BSD License.Dieses Produkt enthält Software der Eclipse Foundation, der\n"
+                + "Open Source Geospatial Foundation und anderer.");
         
-        GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_CENTER, GridData.VERTICAL_ALIGN_CENTER,
-                true,true);
-        l.setLayoutData(gridData);
+        Label udigLongLabel = new Label(composite_1, SWT.NONE);
+        udigLongLabel.setText("Nutzerfreundliches Desktop-Internet GIS");
+        udigLongLabel.setFont(new Font(d, "Lucida Grande", 14, SWT.NORMAL));
+        udigLongLabel.setAlignment(SWT.CENTER);
+        udigLongLabel.setBounds(130, 172, 290, 24);
+        
+        Label copyRightLabel = new Label(composite_1, SWT.NONE);
+        copyRightLabel.setText("© Copyright Refractions Research und andere, 2015");
+        copyRightLabel.setFont(new Font(d, "Lucida Grande", 11, SWT.NORMAL));
+        copyRightLabel.setAlignment(SWT.CENTER);
+        copyRightLabel.setBounds(130, 196, 290, 12);
+        
+        Label udigAbbrLabel = new Label(composite_1, SWT.NONE);
+        udigAbbrLabel.setAlignment(SWT.RIGHT);
+        udigAbbrLabel.setFont(new Font(d,"Lucida Grande", 38, SWT.NORMAL));
+        udigAbbrLabel.setBounds(10, 173, 114, 53);
+        udigAbbrLabel.setText("uDig");
         
     }
  
