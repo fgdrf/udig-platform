@@ -112,7 +112,7 @@
    <extension
          point="org.eclipse.ui.splashHandlers">
       <splashHandler
-            class="org.locationtech.udig.CopyRightSplashHandler"
+            class="org.locationtech.udig.internal.CopyRightSplashHandler"
             id="org.locationtech.udig.product.splashId">
       </splashHandler>
       <splashHandlerProductBinding
