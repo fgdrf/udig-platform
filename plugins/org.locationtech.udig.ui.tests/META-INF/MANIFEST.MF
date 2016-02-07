@@ -8,7 +8,7 @@ Bundle-Vendor: udig.refractions.net
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.junit;bundle-version="[4.0.0,5.0.0)",
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.locationtech.udig.ui
 Bundle-ActivationPolicy: lazy
 Export-Package: org.locationtech.udig.ui,org.locationtech.udig.ui.test

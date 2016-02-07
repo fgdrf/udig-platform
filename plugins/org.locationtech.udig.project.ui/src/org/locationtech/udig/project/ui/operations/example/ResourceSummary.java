@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
+import org.geotools.data.FeatureSource;
+import org.geotools.data.FeatureStore;
 import org.locationtech.udig.catalog.IGeoResource;
 import org.locationtech.udig.catalog.IGeoResourceInfo;
 import org.locationtech.udig.project.ui.internal.Messages;
@@ -22,14 +28,6 @@ import org.locationtech.udig.project.ui.internal.ProjectUIPlugin;
 import org.locationtech.udig.project.ui.summary.SummaryData;
 import org.locationtech.udig.project.ui.summary.SummaryDialog;
 import org.locationtech.udig.ui.operations.IOp;
-
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Display;
-import org.geotools.data.FeatureSource;
-import org.geotools.data.FeatureStore;
-import org.geotools.data.wms.WebMapServer;
 
 import com.vividsolutions.jts.geom.Envelope;
 
@@ -74,7 +72,8 @@ public class ResourceSummary implements IOp {
             data.add(new SummaryData( Messages.MultiTargetOp_crs, crs));
             data.add(new SummaryData( Messages.MultiTargetOp_featuresource, resource.canResolve(FeatureSource.class)));
             data.add(new SummaryData( Messages.MultiTargetOp_featurestore, resource.canResolve(FeatureStore.class)));
-            data.add(new SummaryData( Messages.MultiTargetOp_wms, resource.canResolve(WebMapServer.class)));
+            // TODO move to WMS plugin
+            // data.add(new SummaryData( Messages.MultiTargetOp_wms, resource.canResolve(WebMapServer.class)));
             boolean first=false;
             for( String word : info.getKeywords() ) {
                 if( first )

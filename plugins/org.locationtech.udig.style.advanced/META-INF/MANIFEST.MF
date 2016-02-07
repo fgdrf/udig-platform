@@ -7,7 +7,7 @@ Bundle-Activator: org.locationtech.udig.style.advanced.StylePlugin
 Bundle-Vendor: HydroloGIS S.r.l.
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.locationtech.udig.project,
  org.locationtech.udig.project.ui,
  org.locationtech.udig.ui,

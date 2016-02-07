@@ -10,25 +10,20 @@
  */
 package org.locationtech.udig.style.cache;
 
+import net.miginfocom.swt.MigLayout;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.geotools.coverage.grid.io.AbstractGridCoverage2DReader;
 import org.geotools.data.FeatureSource;
-import org.geotools.data.wms.WebMapServer;
-import org.geotools.styling.Style;
-import org.opengis.coverage.grid.GridCoverage;
-
-import net.miginfocom.swt.MigLayout;
 import org.locationtech.udig.project.internal.Layer;
 import org.locationtech.udig.style.IStyleConfigurator;
-import org.locationtech.udig.style.sld.SLDContent;
+import org.opengis.coverage.grid.GridCoverage;
 
 public class CacheConfigurator extends IStyleConfigurator {
 

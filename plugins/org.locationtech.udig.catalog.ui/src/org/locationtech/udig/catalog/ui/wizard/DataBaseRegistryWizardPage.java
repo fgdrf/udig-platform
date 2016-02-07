@@ -47,6 +47,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
 // TODO: HTMLify this javadoc
+// TODO: Review and extract to extension (because of dbcp dependencies in core.uid)
 /**
  * David's magic superclass reduced to linear, documented, boring reality so that it may be
  * understandable by mortals; this is an abstract superclass for implementations of the

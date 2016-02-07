@@ -17,11 +17,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.awt.image.RenderedImage;
-import java.util.List;
-
-import org.locationtech.udig.project.internal.Layer;
-import org.locationtech.udig.ui.Drawing;
-import org.locationtech.udig.ui.graphics.ViewportGraphics;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.GC;
@@ -30,10 +25,11 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Display;
 import org.geotools.data.FeatureSource;
-import org.geotools.data.wms.WebMapServer;
-import org.geotools.data.wms.request.GetLegendGraphicRequest;
 import org.geotools.feature.FeatureIterator;
 import org.geotools.styling.Style;
+import org.locationtech.udig.project.internal.Layer;
+import org.locationtech.udig.ui.Drawing;
+import org.locationtech.udig.ui.graphics.ViewportGraphics;
 import org.opengis.feature.simple.SimpleFeature;
 
 /**
@@ -109,6 +105,8 @@ public class GlyphBuilder {
         }
         return swtdata;
     }
+    
+    /* TODO move to WMS plugin 
     public ImageDescriptor createWMSGylph( Layer target ) {
         if (target.isType(WebMapServer.class))
             return null;
@@ -142,12 +140,13 @@ public class GlyphBuilder {
             // darn
         }
         return null;
-        /*
-         * BufferedImage image = createBufferedImage( target, 16, 16); Graphics2D g2 = (Graphics2D)
-         * image.getGraphics(); g2.setColor(Color.GREEN); g2.fillRect(1, 1, 14, 14);
-         * g2.setColor(Color.BLACK); g2.drawRect(0, 0, 15, 15); return createImageDescriptor(image);
-         */
+        
+//         BufferedImage image = createBufferedImage( target, 16, 16); Graphics2D g2 = (Graphics2D)
+//         image.getGraphics(); g2.setColor(Color.GREEN); g2.fillRect(1, 1, 14, 14);
+//         g2.setColor(Color.BLACK); g2.drawRect(0, 0, 15, 15); return createImageDescriptor(image);
+         
     }
+*/
     private SimpleFeature sampleFeature( Layer layer ) {
         FeatureIterator<SimpleFeature> reader = null;
         try {
@@ -249,20 +248,24 @@ public class GlyphBuilder {
         // return null;
     }
     public Object createGlyph( Layer layer ) {
+        /* TODO move to WMS plugin and make this one extent-able
         try {
             ImageDescriptor glyph;
+            
             if (layer.isType(WebMapServer.class)) {
                 glyph = createWMSGylph(layer);
                 if (glyph != null)
                     return glyph;
             }
-            /*
-             * // This so does not work right now if (layer.getStyle() != null) { glyph =
-             * createGylph( layer, layer.getStyle() ); if( glyph != null ) return glyph; }
-             */
+            
+            
+             // This so does not work right now if (layer.getStyle() != null) { glyph =
+             // createGylph( layer, layer.getStyle() ); if( glyph != null ) return glyph; }
+             
         } catch (Throwable t) {
             t.printStackTrace();
         }
+        */
         return ProjectEditPlugin.INSTANCE.getImage("full/obj16/Layer"); //$NON-NLS-1$
     }
 

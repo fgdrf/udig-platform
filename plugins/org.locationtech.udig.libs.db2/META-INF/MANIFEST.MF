@@ -8,6 +8,6 @@ Bundle-ClassPath: .,libs/db2jcc_license_cu.jar,
  libs/db2jcc.jar
 Eclipse-RegisterBuddy: org.locationtech.udig.libs
 Require-Bundle: org.eclipse.ui,
- org.locationtech.udig.libs
+ org.locationtech.udig.libs.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Eclipse-BundleShape: dir

@@ -118,7 +118,6 @@ public class ImageExportPage extends WizardPage {
 
         formats = new ArrayList<ImageExportFormat>();
         formats.addAll(loadImageWriterSpis());
-        formats.add(new GeotiffImageExportFormat());
         formats.add(new PDFImageExportFormat());
 
         Collections.sort(formats, new Comparator<ImageExportFormat>(){

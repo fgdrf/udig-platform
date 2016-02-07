@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.locationtech.udig.catalog.imageio;singleton:=true
+Bundle-SymbolicName: org.locationtech.udig.catalog.gdal;singleton:=true
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: udig.refractions.net
 Bundle-Localization: plugin
@@ -9,7 +9,7 @@ Eclipse-RegisterBuddy: org.locationtech.udig.libs
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.locationtech.udig.catalog,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.locationtech.udig.catalog.ui,
  org.locationtech.udig.catalog.rasterings,
  org.locationtech.udig.project,

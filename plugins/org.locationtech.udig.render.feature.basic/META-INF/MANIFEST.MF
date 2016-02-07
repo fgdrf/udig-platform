@@ -9,7 +9,7 @@ Bundle-Localization: plugin
 Export-Package: org.locationtech.udig.render.internal.feature.basic
 Require-Bundle: org.eclipse.core.runtime,
  org.locationtech.udig.project,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.eclipse.ui,
  org.locationtech.udig.project.ui,
  org.locationtech.udig.style.sld

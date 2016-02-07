@@ -29,6 +29,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
 
 /**
+ * TODO Review : is it necessary to have dependency on org.joda.time.DateTime in core modules?
  * TODO Purpose of org.locationtech.udig.project.internal.render
  * <p>
  * </p>

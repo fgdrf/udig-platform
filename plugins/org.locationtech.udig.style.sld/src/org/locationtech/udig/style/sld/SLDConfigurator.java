@@ -81,8 +81,8 @@ public class SLDConfigurator extends IStyleConfigurator {
     public boolean canStyle( Layer layer ) {
         if (layer.hasResource(FeatureSource.class))
             return true;
-        if (layer.hasResource(org.geotools.data.ows.Layer.class))
-            return true;
+//        if (layer.hasResource(org.geotools.data.ows.Layer.class))
+//            return true;
         return false; // TODO: check for wms supporting sld
     }
 

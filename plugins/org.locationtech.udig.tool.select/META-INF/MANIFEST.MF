@@ -9,7 +9,7 @@ Bundle-Localization: plugin
 Export-Package: org.locationtech.udig.tool.select
 Require-Bundle: org.locationtech.udig.ui,
  org.locationtech.udig.catalog,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.eclipse.ui,
  org.eclipse.core.runtime,
  org.locationtech.udig.project.ui,

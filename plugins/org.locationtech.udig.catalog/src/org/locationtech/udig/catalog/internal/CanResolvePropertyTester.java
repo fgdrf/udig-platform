@@ -9,13 +9,11 @@
  */
 package org.locationtech.udig.catalog.internal;
 
-import org.locationtech.udig.catalog.IResolve;
-
 import org.eclipse.core.expressions.PropertyTester;
 import org.geotools.data.DataStore;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.data.simple.SimpleFeatureStore;
-import org.geotools.data.wms.WebMapServer;
+import org.locationtech.udig.catalog.IResolve;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.style.Style;
 
@@ -57,12 +55,14 @@ public class CanResolvePropertyTester extends PropertyTester {
         else if( PROPERTY_DATASTORE.equals(property)){
             return resolve.canResolve( DataStore.class );            
         }
+        /* minimal dependency without plugins
         else if( PROPERTY_WMS.equals(property)){
             return resolve.canResolve( WebMapServer.class );            
         }
         else if( PROPERTY_WMS_LAYER.equals(property)){
             return resolve.canResolve( org.geotools.data.ows.Layer.class );            
         }
+        */
         else if( PROPERTY_SCHEMA.equals(property)){
             return resolve.canResolve( SimpleFeatureType.class );            
         }

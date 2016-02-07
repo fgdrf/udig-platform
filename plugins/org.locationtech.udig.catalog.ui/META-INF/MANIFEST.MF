@@ -24,7 +24,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface,
  org.locationtech.udig.catalog;visibility:=reexport,
  org.locationtech.udig.ui;visibility:=reexport,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.eclipse.core.expressions
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

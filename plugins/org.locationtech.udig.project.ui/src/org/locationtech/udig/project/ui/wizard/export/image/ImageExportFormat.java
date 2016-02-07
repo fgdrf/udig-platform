@@ -23,6 +23,8 @@ import org.eclipse.swt.widgets.Control;
  * 
  * @author jesse
  * @since 1.1.0
+ * 
+ * TODO create an extension-point for this to avoid dependencies e.g. to GeoTiff from this bundle 
  */
 public abstract class ImageExportFormat {
 

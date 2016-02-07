@@ -11,11 +11,13 @@
             class="org.locationtech.udig.issues.IssuesList"
             id="memory"
             name="%issues.list.memory.name"/>
+            <!-- TODO move POSTGIS strategy to postgis issue plugin
       <list
             class="org.locationtech.udig.issues.StrategizedIssuesList"
             configurator="org.locationtech.udig.issues.internal.datastore.PostgisIssuesListConfigurator"
             id="issuesList"
             name="%issues.list.wfs.name"/>
+            -->
    </extension>
       <extension
          point="org.eclipse.ui.views">

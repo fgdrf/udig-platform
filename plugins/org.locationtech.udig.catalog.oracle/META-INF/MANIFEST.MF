@@ -10,6 +10,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.locationtech.udig.catalog,
  org.locationtech.udig.catalog.ui,
- org.locationtech.udig.libs
+ org.locationtech.udig.libs.core
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

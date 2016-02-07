@@ -8,7 +8,7 @@ Bundle-Vendor: udig.refractions.net
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui;visibility:=reexport,
  org.eclipse.core.runtime;visibility:=reexport,
- org.locationtech.udig.libs;visibility:=reexport,
+ org.locationtech.udig.libs.core;visibility:=reexport,
  org.locationtech.udig.project;visibility:=reexport,
  org.locationtech.udig.ui;visibility:=reexport,
  org.locationtech.udig.project.ui,

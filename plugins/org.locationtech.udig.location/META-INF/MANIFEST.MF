@@ -7,7 +7,7 @@ Bundle-Activator: org.locationtech.udig.location.LocationUIPlugin
 Bundle-Vendor: udig.refractions.net
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.locationtech.udig.ui,
  org.eclipse.ui,
  org.locationtech.udig.project,

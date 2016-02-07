@@ -10,22 +10,11 @@
 package org.locationtech.udig.project.internal.render.impl;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
-import org.locationtech.udig.project.internal.Layer;
-import org.locationtech.udig.project.internal.Messages;
-import org.locationtech.udig.project.internal.ProjectPlugin;
-import org.locationtech.udig.ui.graphics.SLDs;
-
-import org.geotools.data.ows.StyleImpl;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.styling.FeatureTypeStyle;
 import org.geotools.styling.LineSymbolizer;
 import org.geotools.styling.PointSymbolizer;
@@ -33,6 +22,9 @@ import org.geotools.styling.PolygonSymbolizer;
 import org.geotools.styling.RasterSymbolizer;
 import org.geotools.styling.Style;
 import org.geotools.styling.StyleBuilder;
+import org.locationtech.udig.project.internal.Layer;
+import org.locationtech.udig.project.internal.Messages;
+import org.locationtech.udig.ui.graphics.SLDs;
 
 /**
  * A utility class for obtaining precanned or random styles
@@ -201,9 +193,10 @@ public class Styling {
      * @return a list of style names that can be used on the given layer.
      */
     @SuppressWarnings("unchecked")
-    public static Collection getStyleNames( Layer currentLayer ) {
+    private static Collection getStyleNames( Layer currentLayer ) {
         // URI id=currentLayer.getID();
         // if( id.containsKey(WMSRegistryEntry.GET_CAPABILITIES_URL) ){
+        /* TODO refactor into a WMS bundle to work with WMS styles
         if (currentLayer.isType(WebMapServer.class)) { // checking for wms
 
             List<String> l = new LinkedList<String>();
@@ -218,6 +211,7 @@ public class Styling {
             l.add(Messages.Styling_default); 
             return l;
         }
+        */
 
         return STYLES.keySet();
     }

@@ -50,6 +50,7 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
  * @author Aritz Davila (www.axios.es)
  * @since 1.3.3
  * 
+ * TODO destination format should be provided (depending on available extensions/plug-ins )
  */
 public class GeoReferencingProcess {
 

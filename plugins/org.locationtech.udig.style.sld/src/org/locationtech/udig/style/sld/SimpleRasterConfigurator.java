@@ -15,14 +15,6 @@ import java.awt.Color;
 
 import javax.media.jai.Histogram;
 
-import org.locationtech.udig.project.internal.Layer;
-import org.locationtech.udig.project.internal.StyleBlackboard;
-import org.locationtech.udig.style.sld.internal.Messages;
-import org.locationtech.udig.style.sld.simple.ChannelViewer;
-import org.locationtech.udig.style.sld.simple.OpacityViewer;
-import org.locationtech.udig.style.sld.simple.RGBChannelViewer;
-import org.locationtech.udig.style.sld.simple.ScaleViewer;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -42,7 +34,6 @@ import org.eclipse.swt.widgets.Label;
 import org.geotools.coverage.grid.GridCoverage2D;
 import org.geotools.coverage.grid.io.AbstractGridCoverage2DReader;
 import org.geotools.coverage.processing.OperationJAI;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.renderer.lite.gridcoverage2d.RasterSymbolizerHelper;
 import org.geotools.styling.RasterSymbolizer;
@@ -51,6 +42,13 @@ import org.geotools.styling.SLD;
 import org.geotools.styling.SelectedChannelType;
 import org.geotools.styling.Style;
 import org.geotools.styling.StyleFactory;
+import org.locationtech.udig.project.internal.Layer;
+import org.locationtech.udig.project.internal.StyleBlackboard;
+import org.locationtech.udig.style.sld.internal.Messages;
+import org.locationtech.udig.style.sld.simple.ChannelViewer;
+import org.locationtech.udig.style.sld.simple.OpacityViewer;
+import org.locationtech.udig.style.sld.simple.RGBChannelViewer;
+import org.locationtech.udig.style.sld.simple.ScaleViewer;
 import org.opengis.coverage.grid.GridCoverage;
 import org.opengis.filter.FilterFactory2;
 import org.opengis.parameter.ParameterValueGroup;
@@ -111,9 +109,9 @@ public class SimpleRasterConfigurator extends AbstractSimpleConfigurator {
 
     @Override
     public boolean canStyle( Layer aLayer ) {
-    	if (aLayer.hasResource(WebMapServer.class)){
-    		return true;
-    	}
+//    	if (aLayer.hasResource(WebMapServer.class)){
+//    		return true;
+//    	}
     	
         if (aLayer.hasResource(GridCoverage.class)){
         	try{

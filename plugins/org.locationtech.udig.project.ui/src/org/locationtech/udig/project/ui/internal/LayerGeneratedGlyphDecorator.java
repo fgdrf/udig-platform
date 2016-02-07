@@ -18,17 +18,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import org.locationtech.udig.catalog.IGeoResource;
-import org.locationtech.udig.catalog.IGeoResourceInfo;
-import org.locationtech.udig.catalog.ITransientResolve;
-import org.locationtech.udig.project.ILayer;
-import org.locationtech.udig.project.internal.Layer;
-import org.locationtech.udig.project.internal.ProjectPackage;
-import org.locationtech.udig.project.internal.StyleBlackboard;
-import org.locationtech.udig.ui.ImageCache;
-import org.locationtech.udig.ui.graphics.Glyph;
-import org.locationtech.udig.ui.graphics.SLDs;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -42,12 +31,21 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.LabelProviderChangedEvent;
 import org.eclipse.swt.graphics.Image;
 import org.geotools.data.FeatureSource;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.styling.FeatureTypeStyle;
 import org.geotools.styling.PointSymbolizer;
 import org.geotools.styling.Rule;
 import org.geotools.styling.Style;
 import org.geotools.styling.Symbolizer;
+import org.locationtech.udig.catalog.IGeoResource;
+import org.locationtech.udig.catalog.IGeoResourceInfo;
+import org.locationtech.udig.catalog.ITransientResolve;
+import org.locationtech.udig.project.ILayer;
+import org.locationtech.udig.project.internal.Layer;
+import org.locationtech.udig.project.internal.ProjectPackage;
+import org.locationtech.udig.project.internal.StyleBlackboard;
+import org.locationtech.udig.ui.ImageCache;
+import org.locationtech.udig.ui.graphics.Glyph;
+import org.locationtech.udig.ui.graphics.SLDs;
 import org.opengis.coverage.grid.GridCoverageReader;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.GeometryDescriptor;
@@ -420,9 +418,6 @@ public class LayerGeneratedGlyphDecorator implements ILabelDecorator {
             Rule rule = getRule(sld);
             return generateStyledIcon(layer, rule);
         }
-        if (layer.hasResource(WebMapServer.class)) {
-            return null; // do not support styling for wms yet
-        }
         return null;
     }
 
@@ -513,6 +508,7 @@ public class LayerGeneratedGlyphDecorator implements ILabelDecorator {
      */
     static ImageDescriptor generateDefaultIcon( Layer layer ) {
         // check for a WMS layer first as it has a pretty icon
+        /* TODO move this check to WMS plugin and make this one here extent-able
         if (layer.hasResource(WebMapServer.class) && layer.hasResource(ImageDescriptor.class)) {
             try {
                 ImageDescriptor legendGraphic = layer.getResource(ImageDescriptor.class, null);
@@ -522,6 +518,7 @@ public class LayerGeneratedGlyphDecorator implements ILabelDecorator {
                 // should not really have happened
             }
         }
+        */
         // lets try for featuretype based glyph
         //
         if (layer.hasResource(FeatureSource.class)) {

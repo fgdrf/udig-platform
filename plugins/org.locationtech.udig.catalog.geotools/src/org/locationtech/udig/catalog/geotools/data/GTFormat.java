@@ -13,17 +13,14 @@ import java.io.File;
 import java.net.URL;
 import java.util.Map;
 
-import org.locationtech.udig.catalog.ID;
-import org.locationtech.udig.catalog.ui.CatalogUIPlugin;
-import org.locationtech.udig.catalog.ui.ISharedImages;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.geotools.data.DataAccessFactory;
 import org.geotools.data.DataAccessFactory.Param;
 import org.geotools.data.FileDataStoreFactorySpi;
-import org.geotools.data.property.PropertyDataStoreFactory;
-import org.geotools.data.wfs.WFSDataStoreFactory;
 import org.geotools.jdbc.JDBCDataStoreFactory;
+import org.locationtech.udig.catalog.ID;
+import org.locationtech.udig.catalog.ui.CatalogUIPlugin;
+import org.locationtech.udig.catalog.ui.ISharedImages;
 
 /**
  * Captures knowledge of GeoTools formats; each format is able to recognize a factory/connection
@@ -155,6 +152,7 @@ enum GTFormat {
             return CatalogUIPlugin.getDefault().getImageDescriptor( ISharedImages.FEATURE_FILE_OBJ ); // generic!
         }
     },
+/*    
     WFS {
         @Override
         public boolean accepts( DataAccessFactory factory ) {
@@ -181,6 +179,7 @@ enum GTFormat {
             return CatalogUIPlugin.getDefault().getImageDescriptor( ISharedImages.WFS_OBJ ); // generic!
         }
     },
+
     PROPERTY {
         @Override
         public boolean accepts( DataAccessFactory factory ) {
@@ -211,6 +210,7 @@ enum GTFormat {
             return CatalogUIPlugin.getDefault().getImageDescriptor( ISharedImages.FEATURE_FILE_OBJ ); // generic!
         }
     },
+*/
     OTHER {
         @Override
         public boolean accepts( DataAccessFactory factory ) {

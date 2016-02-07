@@ -9,18 +9,12 @@
  * License v1.0 (http://udig.refractions.net/files/bsd3-v10.html).
  */
 package org.locationtech.udig.style.sld;
-import org.locationtech.udig.project.internal.Layer;
-import org.locationtech.udig.project.internal.StyleBlackboard;
-import org.locationtech.udig.style.sld.simple.ScaleViewer;
-import org.locationtech.udig.ui.graphics.SLDs;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Composite;
-import org.geotools.data.wms.WebMapServer;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.factory.GeoTools;
 import org.geotools.styling.FeatureTypeStyle;
@@ -31,6 +25,10 @@ import org.geotools.styling.Style;
 import org.geotools.styling.StyleBuilder;
 import org.geotools.styling.StyleFactory;
 import org.geotools.styling.Symbolizer;
+import org.locationtech.udig.project.internal.Layer;
+import org.locationtech.udig.project.internal.StyleBlackboard;
+import org.locationtech.udig.style.sld.simple.ScaleViewer;
+import org.locationtech.udig.ui.graphics.SLDs;
 import org.opengis.coverage.grid.GridCoverage;
 
 /**
@@ -71,8 +69,8 @@ public class SimpleGridConfigurator extends AbstractSimpleConfigurator {
 
     @Override
     public boolean canStyle( Layer aLayer ) {
-        if (aLayer.hasResource(GridCoverage.class) 
-                || aLayer.hasResource(WebMapServer.class))
+        if (aLayer.hasResource(GridCoverage.class)) 
+//                || aLayer.hasResource(WebMapServer.class))
             return true;        
         return false;
     }

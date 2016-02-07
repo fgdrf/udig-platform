@@ -14,7 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -44,7 +43,6 @@ import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.geotools.data.FeatureEvent;
 import org.geotools.data.FeatureEvent.Type;
 import org.geotools.data.FeatureSource;
-import org.geotools.data.ows.Layer;
 import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureIterator;
 import org.geotools.data.simple.SimpleFeatureSource;
@@ -422,7 +420,8 @@ public class InfoView2 extends SearchPart {
                     InfoPlugin.log( "Information request "+layer.getName()+" failed "+t, t ); //$NON-NLS-1$ //$NON-NLS-2$
                 }
                 continue;
-            }            
+            }
+/* TODO REVIEW hard-coded WMS dependencies here, make info extent-able 
             if( layer.hasResource( Layer.class ) ) {
                 try {
                     Layer wmsLayer = layer.getResource(Layer.class, new NullProgressMonitor());
@@ -439,6 +438,7 @@ public class InfoView2 extends SearchPart {
                 }
                 continue;
             }
+*/
         }
     }
     @Override

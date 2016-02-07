@@ -23,17 +23,20 @@
           - ensure the lib versions in the classpath are also correct. 
      -->
 
-    <artifactId>pom-libs.download</artifactId>
+    <artifactId>pom-libs.core.download</artifactId>
     <name>uDig 3rd-Party Core libraries Download</name>
     
     <packaging>pom</packaging>
 
     <properties>
         <!-- see geotools root pom for details -->
+        <jts.version>1.13</jts.version>
         <geotools.version>14.1</geotools.version>
         <imageio-ext.version>1.1.12</imageio-ext.version>
+        <jaiext.version>1.0.8</jaiext.version>
         <jfreechart.version>1.0.13</jfreechart.version>
         <jt.version>1.4.0</jt.version>
+        <jt.language.version>0.2.1</jt.language.version>
         <lib.dir>${basedir}/lib</lib.dir>
         <lib.source.dir>${basedir}/lib-src</lib.source.dir>
     </properties>
@@ -62,15 +65,424 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-            <!-- make version explicit here, its approved by CQ#: 7583 -->
-            <groupId>net.java.dev.jsr-275</groupId>
-            <artifactId>jsr-275</artifactId>
-            <version>1.0-beta-2</version>
+                <!-- make version explicit here, its approved by CQ#: 7583 -->
+                <groupId>net.java.dev.jsr-275</groupId>
+                <artifactId>jsr-275</artifactId>
+                <version>1.0-beta-2</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts</artifactId>
+                <version>${jts.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-api</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-coverage</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-cql</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-data</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-jdbc</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-main</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-metadata</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-opengis</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-referencing</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-render</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-xml</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-brewer</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-validation</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-graph</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-process</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-process-geometry</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools</groupId>
+                <artifactId>gt-process-feature</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-sld</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-core</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-filter</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-gml2</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-gml3</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-wfs</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-fes</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geotools.xsd</groupId>
+                <artifactId>gt-xsd-ows</artifactId>
+                <version>${geotools.version}</version>
+            </dependency>
+
+            <!-- imageio-ext -->
+            <dependency>
+                <groupId>it.geosolutions.imageio-ext</groupId>
+                <artifactId>imageio-ext-streams</artifactId>
+                <version>${imageio-ext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.imageio-ext</groupId>
+                <artifactId>imageio-ext-utilities</artifactId>
+                <version>${imageio-ext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.imageio-ext</groupId>
+                <artifactId>imageio-ext-geocore</artifactId>
+                <version>${imageio-ext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.imageio-ext</groupId>
+                <artifactId>imageio-ext-tiff</artifactId>
+                <version>${imageio-ext.version}</version>
+            </dependency>
+
+            <!-- jaiext -->
+            <dependency>
+                <groupId>it.geosolutions.jaiext.affine</groupId>
+                <artifactId>jt-affine</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.iterators</groupId>
+                <artifactId>jt-iterators</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.utilities</groupId>
+                <artifactId>jt-utilities</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.scale</groupId>
+                <artifactId>jt-scale</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.translate</groupId>
+                <artifactId>jt-translate</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.algebra</groupId>
+                <artifactId>jt-algebra</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.bandmerge</groupId>
+                <artifactId>jt-bandmerge</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.bandselect</groupId>
+                <artifactId>jt-bandselect</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.bandcombine</groupId>
+                <artifactId>jt-bandcombine</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.border</groupId>
+                <artifactId>jt-border</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.buffer</groupId>
+                <artifactId>jt-buffer</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.crop</groupId>
+                <artifactId>jt-crop</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.lookup</groupId>
+                <artifactId>jt-lookup</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.mosaic</groupId>
+                <artifactId>jt-mosaic</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.nullop</groupId>
+                <artifactId>jt-nullop</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.rescale</groupId>
+                <artifactId>jt-rescale</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.stats</groupId>
+                <artifactId>jt-stats</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.warp</groupId>
+                <artifactId>jt-warp</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.zonal</groupId>
+                <artifactId>jt-zonal</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.binarize</groupId>
+                <artifactId>jt-binarize</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.format</groupId>
+                <artifactId>jt-format</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.colorconvert</groupId>
+                <artifactId>jt-colorconvert</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.errordiffusion</groupId>
+                <artifactId>jt-errordiffusion</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.orderdither</groupId>
+                <artifactId>jt-orderdither</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.colorindexer</groupId>
+                <artifactId>jt-colorindexer</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.imagefunction</groupId>
+                <artifactId>jt-imagefunction</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.piecewise</groupId>
+                <artifactId>jt-piecewise</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.classifier</groupId>
+                <artifactId>jt-classifier</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.rlookup</groupId>
+                <artifactId>jt-rlookup</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>it.geosolutions.jaiext.vectorbin</groupId>
+                <artifactId>jt-vectorbin</artifactId>
+                <version>${jaiext.version}</version>
+            </dependency>
+
+            <!-- JAI Tools deps -->
+            <dependency>
+                <groupId>org.jaitools</groupId>
+                <artifactId>jt-all</artifactId>
+                <version>${jt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jaitools</groupId>
+                <artifactId>jt-jiffle-language</artifactId>
+                <version>${jt.language.version}</version>
+            </dependency>
+            <!-- 
+            <dependency>
+                <groupId>org.jaitools</groupId>
+                <artifactId>jt-utils</artifactId>
+                <version>${jt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jaitools</groupId>
+                <artifactId>jt-vectorbinarize</artifactId>
+                <version>${jt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jaitools</groupId>
+                <artifactId>jt-zonalstats</artifactId>
+                <version>${jt.version}</version>
+                <scope>provided</scope>
+            </dependency>
+             -->
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <!-- TODO create pickyback for CQ 1909 -->
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <!-- TODO create pickyback for CQ 6437 -->
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <!-- TODO create pickyback for CQ 6438 (version 1.6.0 instead of 1.5.4) 
+            https://commons.apache.org/proper/commons-pool/changes-report.html -->
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.5.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <!-- TODO create pickyback for CQ 2136 -->
+            <groupId>org.apache.xml</groupId>
+            <artifactId>xml-commons-resolver</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <!-- see approved pickyback CQ 10433 for CQ 3264 -->
+            <groupId>commons-jxpath</groupId>
+            <artifactId>commons-jxpath</artifactId>
+            <version>1.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <!-- TODO create pickyback for CQ 2356 -->
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <!-- TODO create pickyback for CQ 1857 -->
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <!-- TODO create pickyback for CQ 1945 (version 1.0.4 instead of 1.0.3) -->
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.0.3</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+        <!-- TODO create pickyback for CQ 1595 -->
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- uDig Specific Extras -->
         <dependency>
             <!-- scope provided means that it is excluded globally -->
@@ -90,11 +502,6 @@
             <artifactId>xmlrpc-client</artifactId>
             <version>3.0</version>
         </dependency>
-        <dependency>
-            <groupId>commons-jxpath</groupId>
-            <artifactId>commons-jxpath</artifactId>
-            <version>1.3</version>
-        </dependency>
 
         <dependency>
             <groupId>net.sourceforge.findbugs</groupId>
@@ -102,56 +509,85 @@
             <version>1.3.2</version>
         </dependency>
 
-        <!-- geotools library -->
+        <!-- geotools core libraries -->
         <dependency>
             <groupId>org.geotools</groupId>
-            <artifactId>gt-main</artifactId>
-            <version>${geotools.version}</version>
+            <artifactId>gt-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
-            <artifactId>gt-render</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-xml</artifactId>
-            <version>${geotools.version}</version>
+            <artifactId>gt-coverage</artifactId>
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-cql</artifactId>
-            <version>${geotools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-main</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-metadata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-opengis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-referencing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-render</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-xml</artifactId>
         </dependency>
 
-        <!-- geotools extentions -->
+        <!-- geotools extentions core dependencies-->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-brewer</artifactId>
-            <version>${geotools.version}</version>
         </dependency>
-    
-    <!-- gt-11 no longer under development.
-    
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-shapefile-renderer</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-    -->
-    
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-validation</artifactId>
-            <version>${geotools.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-graph</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-process</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-process-geometry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-process-feature</artifactId>
+        </dependency>
+
+    <!-- geotools plug-ins moved to libs extensions
+    
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-wms</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
-        <!-- geotools plug-ins -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-arcgrid</artifactId>
@@ -217,35 +653,19 @@
             <artifactId>gt-shapefile</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-    
-    <!-- gt-11: shapefile-ng was merged in shapefile
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-shapefile-ng</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-    -->
+
     
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-wfs</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-process</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-process-geometry</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.geotools</groupId>
-            <artifactId>gt-process-feature</artifactId>
-            <version>${geotools.version}</version>
-        </dependency>
+    
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-process-raster</artifactId>
@@ -261,8 +681,9 @@
             <artifactId>gt-swing</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+-->
         <!-- additional untested plugins so we can connect using generic geotools datastore -->
+<!-- 
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-property</artifactId>
@@ -283,19 +704,49 @@
             <artifactId>gt-jdbc-h2</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+ -->
         <!-- xml formats -->
+        <!-- 
         <dependency>
             <groupId>org.geotools.xsd</groupId>
             <artifactId>gt-xsd-kml</artifactId>
             <version>${geotools.version}</version>
         </dependency>
+         -->
         <dependency>
             <groupId>org.geotools.xsd</groupId>
             <artifactId>gt-xsd-sld</artifactId>
-            <version>${geotools.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-filter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-gml2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-gml3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-wfs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-fes</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools.xsd</groupId>
+            <artifactId>gt-xsd-ows</artifactId>
+        </dependency>
+
+
         <!-- pending -->
         <!--<dependency>
             <groupId>org.geotools</groupId>
@@ -304,12 +755,13 @@
         </dependency>-->
 
         <!-- geotools unsupported modules that we only need for some community modules? -->
+        <!-- 
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-wps</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+ -->
         <!-- 
           | geotools modules required for geoscript
           | since release versions only referenceing the initial gt release version (and not patches)
@@ -341,7 +793,7 @@
             <version>${geotools.version}</version>
         </dependency>
 
-        <dependency>
+            <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-geopkg</artifactId>
             <version>${geotools.version}</version>
@@ -361,33 +813,36 @@
         -->
         
         <!-- others -->
+        <!-- 
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-imagepyramid</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+ -->
+<!-- 
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-coverage-api</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+ -->
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-geojson</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+<!-- 
         <dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-gtopo30</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-
+ -->
         <!-- geotools unsupported modules (ie legacy) -->
         
         <!-- stuff for jgrass contributions -->
+        <!-- 
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
@@ -444,6 +899,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        -->
+<!-- TODO REVIEW : org.joda.time.DateTime is required by ViewportModel API, maybe we find a replacement for this -->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
@@ -452,8 +909,21 @@
         <dependency>
             <groupId>it.geosolutions.imageio-ext</groupId>
             <artifactId>imageio-ext-streams</artifactId>
-            <version>${imageio-ext.version}</version>
         </dependency>
+        <dependency>
+            <groupId>it.geosolutions.imageio-ext</groupId>
+            <artifactId>imageio-ext-utilities</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.geosolutions.imageio-ext</groupId>
+            <artifactId>imageio-ext-geocore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>it.geosolutions.imageio-ext</groupId>
+            <artifactId>imageio-ext-tiff</artifactId>
+        </dependency>
+
+<!-- 
         <dependency>
             <groupId>it.geosolutions.imageio-ext</groupId>
             <artifactId>imageio-ext-netcdf-core</artifactId>
@@ -464,17 +934,10 @@
             <artifactId>imageio-ext-netcdf</artifactId>
             <version>${imageio-ext.version}</version>
         </dependency>
-        <dependency>
-            <groupId>it.geosolutions.imageio-ext</groupId>
-            <artifactId>imageio-ext-utilities</artifactId>
-            <version>${imageio-ext.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>it.geosolutions.imageio-ext</groupId>
-            <artifactId>imageio-ext-geocore</artifactId>
-            <version>${imageio-ext.version}</version>
-        </dependency>
-        <dependency>
+
+ -->
+ <!--
+ <dependency>
             <groupId>opendap</groupId>
             <artifactId>opendap</artifactId>
             <version>2.1</version>
@@ -484,6 +947,7 @@
             <artifactId>gt-grassraster</artifactId>
             <version>${geotools.version}</version>
         </dependency>
+         -->
         <!--<dependency>
             <groupId>org.geotools</groupId>
             <artifactId>gt-coverage-api</artifactId>
@@ -496,6 +960,7 @@
         </dependency>-->
 
         <!-- jfreechart -->
+        <!-- 
         <dependency>
             <groupId>jfree</groupId>
             <artifactId>jfreechart</artifactId>
@@ -522,7 +987,7 @@
             <artifactId>jcommon</artifactId>
             <version>1.0.16</version>
         </dependency>
-
+ -->
         <!-- these may already be accounted for by the above plug-ins -->
         <!--<dependency>
             <groupId>org.geotools.xsd</groupId>
@@ -731,33 +1196,10 @@
         <!-- Apache Commons Libraries -->
         <!-- Prefer to use these from target platform if available -->
         <dependency>
+            <!-- TODO review CQ 4791 (for 2.0.1) available -->
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--<dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>-->
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.0.3</version>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -797,36 +1239,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- JAI Tools deps -->
-        <dependency>
-            <groupId>org.jaitools</groupId>
-            <artifactId>jt-all</artifactId>
-            <version>${jt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jaitools</groupId>
-            <artifactId>jt-jiffle-language</artifactId>
-            <version>0.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jaitools</groupId>
-            <artifactId>jt-utils</artifactId>
-            <version>${jt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jaitools</groupId>
-            <artifactId>jt-vectorbinarize</artifactId>
-            <version>${jt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jaitools</groupId>
-            <artifactId>jt-zonalstats</artifactId>
-            <version>${jt.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
         <!-- antlr dependencies
              ==================
              
@@ -868,6 +1280,7 @@
             <version>1.7.1</version>
         </dependency>
         -->
+        <!-- 
         <dependency>
             <groupId>com.sun.jna</groupId>
             <artifactId>jna</artifactId>
@@ -914,7 +1327,7 @@
             <artifactId>gt-grid</artifactId>
             <version>${geotools.version}</version>
         </dependency>
-        
+         -->
         
     </dependencies>
 

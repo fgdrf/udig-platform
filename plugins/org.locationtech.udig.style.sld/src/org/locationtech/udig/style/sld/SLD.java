@@ -109,7 +109,9 @@ public enum SLD {
             //TODO: Can a text symbolizer be applied to a raster?
             return true;
         }
-    },
+    }
+/* NOT supported by default
+    ,
     RASTER(RasterSymbolizer.class) {
         public ImageDescriptor createImageDescriptor() {
             return StyleGlyph.raster(SWT.COLOR_BLACK, SWT.COLOR_RED, 1);
@@ -126,7 +128,9 @@ public enum SLD {
         public boolean supports( ILayer layer ) {
             return layer.hasResource(org.geotools.data.ows.Layer.class);
         }
-    };
+    }
+*/
+    ;
 
     //private static SLD[] all = new SLD[]{POINT, LINE, POLYGON, RASTER, TEXT};
     

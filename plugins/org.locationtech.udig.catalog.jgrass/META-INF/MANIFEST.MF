@@ -8,7 +8,7 @@ Bundle-Vendor: HydroloGIS S.r.l.
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.locationtech.udig.libs,
+ org.locationtech.udig.libs.core,
  org.locationtech.udig.core,
  org.locationtech.udig.catalog,
  org.locationtech.udig.catalog.rasterings,

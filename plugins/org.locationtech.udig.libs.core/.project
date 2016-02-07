@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.locationtech.udig.libs</name>
+	<name>org.locationtech.udig.libs.core</name>
 	<comment>@key 32303035303731382D31303030206E65742E72656672616374696F6E732E756469672E6C6962732F4A65737365 </comment>
 	<projects>
 	</projects>
