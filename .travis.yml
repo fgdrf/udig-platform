@@ -23,6 +23,7 @@ before_install:
   - export PATH=$PWD/apache-maven-${MVN_VERION}/bin:${PATH}
   - hash -r
 install:
+  - "sudo apt-get install nsis"
   - "sudo pip install 'requests[security]'"
   - "sudo pip install -q sphinx==1.1.3"
   - "travis_wait mvn install -B -f docs/pom.xml -Dtycho.mode=maven -Pdocs" #build documentation using sphinx
@@ -35,6 +36,7 @@ before_script:
 
 script: 
   - "travis_wait mvn install -B -Pproduct -Psdk -T 4"
+  - "cd deploy; ./win64.sh"
 
 notifications:
   email:
@@ -48,3 +50,4 @@ notifications:
 branches:
   only:
     - master
+    - /^travis_.*$/
