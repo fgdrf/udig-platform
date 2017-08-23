@@ -1,22 +1,24 @@
 Tool Preferences
 ================
 
-.. figure:: /images/tool_preferences/toolpreferences.png
+General Preferences
+~~~~~~~~~~~~~~~~~~~
+
+.. figure:: /images/preferences/toolpreferences.png
    :align: center
    :alt:
 
-Available Preferences
-~~~~~~~~~~~~~~~~~~~~~
+Default Feature Attribute
+`````````````````````````
+Name of feature attribute to be displayed in popup when multiple features are detected (case insensitive).
 
--  Default Feature Attribute - name of feature attribute to be displayed in popup when multiple features are detected (case insensitive)
+Default is empty and therfore the Id of a feature will be displayed.
 
 .. toctree::
+   :glob:
    :maxdepth: 1
 
-   Deletion Preferences
-   Edit Tool Preferences
-   Edit Tool Performance Preferences
-   Selection Preferences
+   tool_preferences/*
 
 **Related reference**
 

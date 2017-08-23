@@ -14,14 +14,14 @@ created vertex's location will be set to the neighboring vertex's location.
 
 In the above image the vertex would snap to the red point feature, as long as the correct snap
 behaviour is set. The red circle in the image indicates the area that will be searched. The snap
-radius can be set in the :doc:`Edit Tool Preferences` or by holding :kbd:`ALT` while rotating
+radius can be set in the :doc:`/reference/tool_preferences/Edit Tool Preferences` or by holding :kbd:`ALT` while rotating
 the mouse wheel.
 
 .. note::
    One of the edit tools must be active to set the snap radius using the mouse tool.
 
 .. tip::
-   The color of the snap area can be set in the :doc:`Edit Tool Preferences`. The feedback
+   The color of the snap area can be set in the :doc:`/reference/tool_preferences/Edit Tool Preferences`. The feedback
    color indicates the color of the snap area.
 
 
@@ -48,18 +48,18 @@ The normal snapping choices are as follows:
    The Grid can only be seen if the grid map graphic is added (:menuselection:`Layer --> Grid`)
 
 .. tip::
-   The size of the grid can be changed in the :doc:`Edit Tool Preferences`.
+   The size of the grid can be changed in the :doc:`/reference/tool_preferences/Edit Tool Preferences`.
 
 
 There is two different ways to change the snap behavior:
 
-#. In the :doc:`Edit Tool Preferences` which can be found in the
+#. In the :doc:`/reference/tool_preferences/Edit Tool Preferences` which can be found in the
    :menuselection:`Window --> Preferences` menu.
 #. While an edit to is *active* press :kbd:`CTRL` + :kbd:`SHIFT` + :kbd:`S`. This will cycle through the available snap
    behaviors. A small pop-up will display the new behavior.
 
 **Related reference**
 
-:doc:`Edit Tool Preferences`
+:doc:`/reference/tool_preferences/Edit Tool Preferences`
 
 

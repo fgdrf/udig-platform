@@ -3,7 +3,7 @@ Catalog Preferences
 
 The catalog preferences allow the behavior of the catalog to be set.
 
-.. figure:: /images/catalog_preferences/catalog.png
+.. figure:: /images/preferences/catalog.png
    :align: center
    :alt: 
 
@@ -21,8 +21,8 @@ General Catalog Preferences
 
 .. _preferences-page-catalog-arcsde:
 
-ArcSDE Preference Page
-----------------------
+ArcSDE Preferences
+------------------
 
 The ArcSDE Preference Page is used to configure ArcSDE support in uDig.
 
@@ -93,13 +93,13 @@ Since the drivers are copied into the uDig updating the drivers will require the
 
 :doc:`DB2 page`
 
-.. |image0| image:: /images/db2_preferences/db2Preferences.jpg
-.. |image1| image:: /images/db2_preferences/restart.jpg
+.. |image0| image:: /images/preferences/db2Preferences.jpg
+.. |image1| image:: /images/preferences/restart.jpg
 
 .. _preferences-page-catalog-wms:
 
-WMS Preference Page
-----------------------
+WMS Preferences
+---------------
 
 The WMS Preference Page is used to configure parameter when connecting to a Web Map Server.
 
@@ -112,4 +112,4 @@ The default value is 30 sec.
 
 :doc:`Web Map Server page`
 
-.. |image2| image:: /images/wms_preferences/wmsCatalogPreferences.jpg
+.. |image2| image:: /images/preferences/wmsCatalogPreferences.jpg

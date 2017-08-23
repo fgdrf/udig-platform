@@ -86,7 +86,7 @@ Throw out modifications; reverting to the current contents of the server, databa
 
 **Related reference**
 
-:doc:`Edit Tool Preferences`
+:doc:`/reference/tool_preferences/Edit Tool Preferences`
 
 
 

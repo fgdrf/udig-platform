@@ -4,7 +4,7 @@ Rendering Preferences
 There are a number of preferences that control the performance of rendering maps and appearance of
 the resulting maps. Often the preferences are a trade-off between performance and appearance.
 
-.. figure:: /images/rendering_preferences/renderpreferences.png
+.. figure:: /images/preferences/renderpreferences.png
    :align: center
    :alt: 
 
@@ -32,7 +32,7 @@ General Preferences
 WMS Preferences
 ---------------
 
-.. figure:: /images/wms_preferences/wmspreferences.png
+.. figure:: /images/preferences/wmspreferences.png
    :align: center
    :alt: 
 

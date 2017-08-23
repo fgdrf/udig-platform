@@ -12,7 +12,7 @@ new locations to add more vertices.
 
 .. note::
    Edited polygons are only filled when the fill polygon preference is set in 
-   the :doc:`/reference/Edit Tool Performance Preferences`
+   the :doc:`/reference/tool_preferences/Edit Tool Performance Preferences`
 
 Vertex Snapping
 ~~~~~~~~~~~~~~~

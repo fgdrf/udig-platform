@@ -859,14 +859,14 @@
                     
         <topic label="Tool Preferences" href="EN/reference/Tool Preferences.html">
         
-        <topic label="Deletion Preferences" href="EN/reference/Deletion Preferences.html"/>
+        <topic label="Deletion Preferences" href="EN/reference/tool_preferences/Deletion Preferences.html"/>
 
-        <topic label="Selection Preferences" href="EN/reference/Selection Preferences.html"/>
+        <topic label="Selection Preferences" href="EN/reference/tool_preferences/Selection Preferences.html"/>
 
-        <topic label="Edit Tool Preferences" href="EN/reference/Edit Tool Preferences.html">
+        <topic label="Edit Tool Preferences" href="EN/reference/tool_preferences/Edit Tool Preferences.html">
         
                             
-        <topic label="Edit Tool Performance Preferences" href="EN/reference/Edit Tool Performance Preferences.html">
+        <topic label="Edit Tool Performance Preferences" href="EN/reference/tool_preferences/Edit Tool Performance Preferences.html">
         
                 </topic>
                     
