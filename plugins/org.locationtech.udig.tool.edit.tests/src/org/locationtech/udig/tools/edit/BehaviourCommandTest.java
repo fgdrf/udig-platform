@@ -14,120 +14,116 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.locationtech.udig.project.IMap;
-import org.locationtech.udig.project.command.Command;
-import org.locationtech.udig.project.command.UndoableMapCommand;
-import org.locationtech.udig.project.internal.Map;
-import org.locationtech.udig.tools.edit.support.TestHandler;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Test;
+import org.locationtech.udig.project.IMap;
+import org.locationtech.udig.project.command.Command;
+import org.locationtech.udig.project.command.UndoableMapCommand;
+import org.locationtech.udig.project.internal.Map;
 
 public class BehaviourCommandTest {
 
-    /*
-     * Test method for 'org.locationtech.udig.tools.edit.EventBehaviourCommand.run(IProgressMonitor)'
-     */
     @Test
     public void testRun() throws Exception {
-
-        TestHandler handler=new TestHandler();
-        
         RunBehaviour runBehaviour = new RunBehaviour();
         RunBehaviour runBehaviour2 = new RunBehaviour();
-        List<Behaviour> list=new ArrayList<Behaviour>();
-        
-        list.add( runBehaviour);
-        list.add( runBehaviour2);
-        list.add( new NoRunBehaviour());
-        
-        
-        BehaviourCommand command=new BehaviourCommand(list, handler );
-        command.setMap( (Map) handler.getContext().getMap());
-        assertFalse( runBehaviour.ran );
-        assertFalse( runBehaviour2.ran );
-        
+        List<Behaviour> list = new ArrayList<Behaviour>();
+
+        list.add(runBehaviour);
+        list.add(runBehaviour2);
+        list.add(new NoRunBehaviour());
+
+        BehaviourCommand command = new BehaviourCommand(list, null);
+
+        assertFalse(runBehaviour.ran);
+        assertFalse(runBehaviour2.ran);
+
         NullProgressMonitor nullProgressMonitor = new NullProgressMonitor();
         command.execute(nullProgressMonitor);
-        
-        assertTrue( runBehaviour.ran );
-        assertTrue( runBehaviour2.ran );
-        
+
+        assertTrue(runBehaviour.ran);
+        assertTrue(runBehaviour2.ran);
+
         nullProgressMonitor = new NullProgressMonitor();
         command.rollback(nullProgressMonitor);
-        assertFalse( runBehaviour.ran );
-        assertFalse( runBehaviour2.ran );
-        
+        assertFalse(runBehaviour.ran);
+        assertFalse(runBehaviour2.ran);
+
     }
-    
+
     @Test
     public void testInOrderRunAndRollback() throws Exception {
+        AtomicInteger sharedState = new AtomicInteger(0);
+        RunBehaviour runBehaviour = new RunBehaviour(sharedState);
+        RunBehaviour runBehaviour2 = new RunBehaviour(sharedState);
+        List<Behaviour> list = new ArrayList<Behaviour>();
 
-        TestHandler handler=new TestHandler();
-        
-        RunBehaviour runBehaviour = new RunBehaviour();
-        RunBehaviour runBehaviour2 = new RunBehaviour();
-        List<Behaviour> list=new ArrayList<Behaviour>();
-        
-        list.add( runBehaviour);
-        list.add( runBehaviour2);
-                
-        
-        BehaviourCommand command=new BehaviourCommand(list, handler );
-        command.setMap( (Map) handler.getContext().getMap());
-        assertFalse( runBehaviour.ran );
-        assertFalse( runBehaviour2.ran );
-        
+        list.add(runBehaviour);
+        list.add(runBehaviour2);
+
+        BehaviourCommand command = new BehaviourCommand(list, null);
+        assertFalse(runBehaviour.ran);
+        assertFalse(runBehaviour2.ran);
+
         NullProgressMonitor nullProgressMonitor = new NullProgressMonitor();
         command.execute(nullProgressMonitor);
-        
-        assertTrue( runBehaviour.ran );
-        assertTrue( runBehaviour2.ran );
-        assertTrue( runBehaviour2.time.getTime() > runBehaviour.time.getTime());
-        
+
+        assertTrue(runBehaviour.ran);
+        assertTrue(runBehaviour2.ran);
+        assertTrue(runBehaviour2.internalState > runBehaviour.internalState);
+
         nullProgressMonitor = new NullProgressMonitor();
         command.rollback(nullProgressMonitor);
-        assertFalse( runBehaviour.ran );
-        assertFalse( runBehaviour2.ran );
-        assertFalse( runBehaviour2.time.getTime() > runBehaviour.time.getTime());
-        
+        assertFalse(runBehaviour.ran);
+        assertFalse(runBehaviour2.ran);
+        assertFalse(runBehaviour2.internalState > runBehaviour.internalState);
+
     }
-    
-    class RunBehaviour implements Behaviour{
-        int id=0;
+
+    class RunBehaviour implements Behaviour {
+        int id = 0;
+
         boolean ran;
-        Timestamp time;
-        public boolean isValid( EditToolHandler handler ) {
+
+        private AtomicInteger counter;
+
+        int internalState = 0;
+
+        public RunBehaviour(AtomicInteger sharedState) {
+            this.counter = sharedState;
+        }
+
+        public RunBehaviour() {
+            this(new AtomicInteger());
+        }
+
+        public boolean isValid(EditToolHandler handler) {
             return true;
         }
 
-        public UndoableMapCommand getCommand( EditToolHandler handler) {
-            return new UndoableMapCommand(){
+        public UndoableMapCommand getCommand(EditToolHandler handler) {
+            return new UndoableMapCommand() {
 
-                
                 private Map map;
 
-                public void setMap( IMap map ) {
-                    if( map==null)
-                        fail();
-                    this.map=(Map) map;
+                public void setMap(IMap map) {
+                    this.map = (Map) map;
                 }
 
                 public Map getMap() {
                     return map;
                 }
 
-                public void run( IProgressMonitor monitor ) throws Exception {
-                    if( ran )
+                public void run(IProgressMonitor monitor) throws Exception {
+                    if (ran)
                         fail();
-                    Thread.sleep(10);
-                    time = new Timestamp(System.currentTimeMillis());
-                    ran=true;
+                    internalState = counter.incrementAndGet();
+                    ran = true;
                 }
 
                 public Command copy() {
@@ -138,39 +134,38 @@ public class BehaviourCommandTest {
                     return "Run Command"; //$NON-NLS-1$
                 }
 
-                public void rollback( IProgressMonitor monitor ) throws Exception {
-                    if( !ran )
+                public void rollback(IProgressMonitor monitor) throws Exception {
+                    if (!ran)
                         fail();
-                    Thread.sleep(10);
-                    time = new Timestamp(System.currentTimeMillis());
-                    ran=false;
+                    internalState = counter.incrementAndGet();
+                    ran = false;
                 }
-                
             };
         }
 
-        public void handleError( EditToolHandler handler, Throwable error, UndoableMapCommand command ) {
+        public void handleError(EditToolHandler handler, Throwable error,
+                UndoableMapCommand command) {
             fail();
         }
-        
-    }
-    
-    class NoRunBehaviour implements Behaviour{
 
-        public boolean isValid( EditToolHandler handler ) {
+    }
+
+    class NoRunBehaviour implements Behaviour {
+
+        public boolean isValid(EditToolHandler handler) {
             return false;
         }
 
-        public UndoableMapCommand getCommand( EditToolHandler handler) {
+        public UndoableMapCommand getCommand(EditToolHandler handler) {
             fail();
             return null;
         }
 
-        public void handleError( EditToolHandler handler, Throwable error, UndoableMapCommand command ) {
+        public void handleError(EditToolHandler handler, Throwable error,
+                UndoableMapCommand command) {
             fail();
         }
-        
+
     }
-    
-   
+
 }
