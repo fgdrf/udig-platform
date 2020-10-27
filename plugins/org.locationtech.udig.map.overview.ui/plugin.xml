@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.locationtech.udig.mapgraphic.mapgraphic">
+      <mapGraphic
+            class="org.locationtech.udig.map.overview.ui.MapOverviewGraphic"
+            icon="icons/map_overview.png"
+            id="MapOverView"
+            name="Map Overview">
+      </mapGraphic>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            class="org.locationtech.udig.map.overview.ui.MapOverviewView"
+            fastViewWidthRatio="0.20"
+            icon="icons/map_overview.png"
+            id="org.locationtech.udig.map.overview.ui.MapOverviewView"
+            name="Map Overview"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

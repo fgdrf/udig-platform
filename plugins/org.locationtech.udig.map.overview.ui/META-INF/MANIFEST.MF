@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: MapGraphic Overview
+Bundle-SymbolicName: org.locationtech.udig.map.overview.ui;singleton:=true
+Bundle-Version: 2.3.0.qualifier
+Bundle-Vendor: udig.refractions.net
+Automatic-Module-Name: org.locationtech.udig.map.overview.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.locationtech.udig.libs,
+ org.locationtech.udig.mapgraphic,
+ org.locationtech.udig.catalog.shp
+Export-Package: org.locationtech.udig.map.overview.ui
