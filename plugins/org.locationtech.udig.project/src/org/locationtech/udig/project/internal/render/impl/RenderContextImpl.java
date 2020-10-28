@@ -392,6 +392,14 @@ public class RenderContextImpl extends AbstractContextImpl implements RenderCont
             tempCache.flush();
             tempCache = null;
         }
+        
+        imagesize = null;
+//        layerInternal = null;
+//        geoResourceInternal = null;
+//        labelPainterLocal = null;
+//        mapInternal = null;
+        renderManagerInternal = null;
+        
     }
     
     public RenderContextImpl copy() {

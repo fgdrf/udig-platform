@@ -73,6 +73,7 @@ public class RenderManagerImpl extends EObjectImpl implements RenderManager {
      * @generated NOT
      * @ordered
      */
+    @Deprecated
     protected RendererCreator rendererCreator;
 
     /**
@@ -435,13 +436,13 @@ public class RenderManagerImpl extends EObjectImpl implements RenderManager {
     public void dispose() {
         checkState();
         if (renderExecutor != null) {
-            ((RenderContextImpl) renderExecutor.getContext()).dispose();
             getRenderExecutor().dispose();
+            ((RenderContextImpl) renderExecutor.getContext()).dispose();
         }
 
         mapDisplay = null;
-
         renderExecutor = null;
+        rendererCreator = null;
 
         getMapInternal().setRenderManagerInternal(null);
 
@@ -627,7 +628,7 @@ public class RenderManagerImpl extends EObjectImpl implements RenderManager {
     }
 
     /**
-     * @see org.locationtech.udig.project.internal.render.RenderManager#refreshSelection(org.locationtech.jts.geom.Envelope)
+     * @see org.locationtech.udig.project.internal.render.RenderManager#refreshSelection(org.locationtech.udig.project.ILayer, org.locationtech.jts.geom.Envelope)
      */
     public void refreshSelection(ILayer layer, Envelope bounds) {
         throw new UnsupportedOperationException();

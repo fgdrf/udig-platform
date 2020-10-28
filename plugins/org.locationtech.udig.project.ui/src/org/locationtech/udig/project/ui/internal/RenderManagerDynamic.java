@@ -66,6 +66,7 @@ import org.locationtech.udig.project.ui.render.displayAdapter.ViewportPane;
  * 
  * @generated
  */
+@Deprecated
 public class RenderManagerDynamic extends RenderManagerImpl {
 	/**
 	 * Watches the layer add / delete / change of zorder and style changes.
