@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.easymock.EasyMock;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.junit.Test;
+import org.locationtech.udig.project.command.navigation.SetScaleCommand;
 import org.locationtech.udig.project.internal.render.ViewportModel;
 
 public class SetScaleCommandTest {
@@ -12,12 +13,6 @@ public class SetScaleCommandTest {
     private static final double SCALE_TO_SET = 1 / 5000;
 
     private static final double PREVIOUS_SCALE = 1 / 500;
-
-    @Test
-    public void testCopy() throws Exception {
-        SetScaleCommand setScaleCommand = new SetScaleCommand(SCALE_TO_SET);
-        assertNotSame(setScaleCommand, setScaleCommand.copy());
-    }
 
     @Test
     public void ifModelIsSetSetScaleIsCalled() throws Exception {
