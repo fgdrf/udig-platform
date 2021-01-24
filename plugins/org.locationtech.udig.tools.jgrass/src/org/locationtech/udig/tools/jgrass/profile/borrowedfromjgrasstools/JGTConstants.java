@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,13 +9,9 @@
  */
 package org.locationtech.udig.tools.jgrass.profile.borrowedfromjgrasstools;
 
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 /**
  * Constant values and novalues handling.
- * 
+ *
  * @author Andrea Antonello (www.hydrologis.com)
  */
 public class JGTConstants {
@@ -23,21 +19,21 @@ public class JGTConstants {
      * constants for models
      */
     /**
-     * The default double novalue. 
-     * 
-     * <p>Note: if this changes, also the checker methods like 
+     * The default double novalue.
+     *
+     * <p>Note: if this changes, also the checker methods like
      * {@link #isNovalue(double)} have to be changed.
      */
     public static final double doubleNovalue = Double.NaN;
 
     /**
      * Checker for default double novalue.
-     * 
+     *
      * <p>
      * This was done since with NaN the != check doesn't work.
      * This has to be strict in line with the {@link #doubleNovalue}.
      * </p>
-     * 
+     *
      * @param value the value to check.
      * @return true if the passed value is a novalue.
      */
@@ -47,10 +43,10 @@ public class JGTConstants {
 
     /**
      * Checker for a list of default double novalues.
-     * 
+     *
      * @param values the list of values to check.
      * @return true if one of the passes values is a novalue.
-     * 
+     *
      * @see #isNovalue(double)
      */
     public static boolean isOneNovalue( double... values ) {
@@ -62,18 +58,18 @@ public class JGTConstants {
     }
 
     /**
-     * The default float novalue. 
+     * The default float novalue.
      */
     public static final float floatNovalue = Float.NaN;
 
     /**
      * Checker for default float novalue.
-     * 
+     *
      * <p>
      * This was done since with NaN the != check doesn't work.
      * This has to be strict in line with the {@link #floatNovalue}.
      * </p>
-     * 
+     *
      * @param value the value to check.
      * @return true if the passed value is a novalue.
      */
@@ -82,18 +78,18 @@ public class JGTConstants {
     }
 
     /**
-     * The default int novalue. 
+     * The default int novalue.
      */
     public static final int intNovalue = Integer.MAX_VALUE;
 
     /**
      * Checker for default int novalue.
-     * 
+     *
      * <p>
      * This was done since with NaN the != check doesn't work.
      * This has to be strict in line with the {@link #intNovalue}.
      * </p>
-     * 
+     *
      * @param value the value to check.
      * @return true if the passed value is a novalue.
      */
@@ -103,7 +99,7 @@ public class JGTConstants {
 
     /**
      * Check if the width and height of a raster would lead to a numeric overflow.
-     * 
+     *
      * @param width width of the matrix or raster.
      * @param height height of the matrix or raster.
      * @return true if there is overfow.
@@ -115,27 +111,6 @@ public class JGTConstants {
             return true;
         }
     }
-
-    /**
-     * Global formatter for joda datetime (yyyy-MM-dd HH:mm:ss).
-     */
-    public static String dateTimeFormatterYYYYMMDDHHMMSS_string = "yyyy-MM-dd HH:mm:ss";
-    public static DateTimeFormatter dateTimeFormatterYYYYMMDDHHMMSS = DateTimeFormat
-            .forPattern(dateTimeFormatterYYYYMMDDHHMMSS_string);
-
-    /**
-    * Global formatter for joda datetime (yyyy-MM-dd HH:mm).
-    */
-    public static String dateTimeFormatterYYYYMMDDHHMM_string = "yyyy-MM-dd HH:mm";
-    public static DateTimeFormatter dateTimeFormatterYYYYMMDDHHMM = DateTimeFormat
-            .forPattern(dateTimeFormatterYYYYMMDDHHMM_string);
-
-    public static String utcDateFormatterYYYYMMDDHHMMSS_string = "yyyy-MM-dd HH:mm:ss";
-    public static DateTimeFormatter utcDateFormatterYYYYMMDDHHMMSS = DateTimeFormat.forPattern(
-            utcDateFormatterYYYYMMDDHHMMSS_string).withZone(DateTimeZone.UTC);
-    public static String utcDateFormatterYYYYMMDDHHMM_string = "yyyy-MM-dd HH:mm";
-    public static DateTimeFormatter utcDateFormatterYYYYMMDDHHMM = DateTimeFormat.forPattern(utcDateFormatterYYYYMMDDHHMM_string)
-            .withZone(DateTimeZone.UTC);
 
     /**
      * Enumeration defining meteo types.

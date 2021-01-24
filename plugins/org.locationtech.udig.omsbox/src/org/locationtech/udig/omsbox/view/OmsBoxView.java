@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,14 +9,11 @@
  */
 package org.locationtech.udig.omsbox.view;
 
-import i18n.omsbox.Messages;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-import org.locationtech.udig.ui.PlatformGIS;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -47,8 +44,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.ViewPart;
-import org.joda.time.DateTime;
-
 import org.locationtech.udig.omsbox.OmsBoxPlugin;
 import org.locationtech.udig.omsbox.core.ModuleDescription;
 import org.locationtech.udig.omsbox.core.ModuleDescription.Status;
@@ -59,10 +54,13 @@ import org.locationtech.udig.omsbox.utils.OmsBoxConstants;
 import org.locationtech.udig.omsbox.utils.ViewerFolder;
 import org.locationtech.udig.omsbox.utils.ViewerModule;
 import org.locationtech.udig.omsbox.view.widgets.ModuleGui;
+import org.locationtech.udig.ui.PlatformGIS;
+
+import i18n.omsbox.Messages;
 
 /**
  * The database view.
- * 
+ *
  * @author Andrea Antonello (www.hydrologis.com)
  */
 public class OmsBoxView extends ViewPart {
@@ -78,7 +76,7 @@ public class OmsBoxView extends ViewPart {
 
     private ModuleGui currentSelectedModuleGui;
 
-    private HashMap<String, Control> module2GuiMap = new HashMap<String, Control>();
+    private HashMap<String, Control> module2GuiMap = new HashMap<>();
 
     public OmsBoxView() {
 
@@ -117,7 +115,7 @@ public class OmsBoxView extends ViewPart {
         // HashMap<String, List<ModuleDescription>> availableModules =
         // OmsModulesManager.getInstance().browseModules(false);
         modulesViewer = createTreeViewer(modulesListComposite);
-        List<ViewerFolder> viewerFolders = new ArrayList<ViewerFolder>(); // ViewerFolder.hashmap2ViewerFolders(availableModules);
+        List<ViewerFolder> viewerFolders = new ArrayList<>(); // ViewerFolder.hashmap2ViewerFolders(availableModules);
         modulesViewer.setInput(viewerFolders);
         addFilterButtons(modulesListComposite);
         addQuickSettings(modulesListComposite);
@@ -146,9 +144,11 @@ public class OmsBoxView extends ViewPart {
         GridData controlGD = new GridData(SWT.FILL, SWT.FILL, true, true);
         control.setLayoutData(controlGD);
         modulesViewer.setContentProvider(new ITreeContentProvider(){
+            @Override
             public Object[] getElements( Object inputElement ) {
                 return getChildren(inputElement);
             }
+            @Override
             public Object[] getChildren( Object parentElement ) {
                 if (parentElement instanceof List< ? >) {
                     List< ? > list = (List< ? >) parentElement;
@@ -159,7 +159,7 @@ public class OmsBoxView extends ViewPart {
                     ViewerFolder folder = (ViewerFolder) parentElement;
                     List<ViewerFolder> subFolders = folder.getSubFolders();
                     List<ViewerModule> modules = folder.getModules();
-                    List<Object> allObjs = new ArrayList<Object>();
+                    List<Object> allObjs = new ArrayList<>();
                     allObjs.addAll(subFolders);
                     allObjs.addAll(modules);
 
@@ -167,6 +167,7 @@ public class OmsBoxView extends ViewPart {
                 }
                 return new Object[0];
             }
+            @Override
             public Object getParent( Object element ) {
                 if (element instanceof ViewerFolder) {
                     ViewerFolder folder = (ViewerFolder) element;
@@ -179,18 +180,22 @@ public class OmsBoxView extends ViewPart {
                 return null;
             }
 
+            @Override
             public boolean hasChildren( Object element ) {
                 return getChildren(element).length > 0;
             }
 
+            @Override
             public void dispose() {
             }
+            @Override
             public void inputChanged( Viewer viewer, Object oldInput, Object newInput ) {
             }
 
         });
 
         modulesViewer.setLabelProvider(new LabelProvider(){
+            @Override
             public Image getImage( Object element ) {
                 if (element instanceof ViewerFolder) {
                     return ImageCache.getInstance().getImage(ImageCache.CATEGORY);
@@ -207,6 +212,7 @@ public class OmsBoxView extends ViewPart {
                 return null;
             }
 
+            @Override
             public String getText( Object element ) {
                 if (element instanceof ViewerFolder) {
                     ViewerFolder categoryFolder = (ViewerFolder) element;
@@ -222,6 +228,7 @@ public class OmsBoxView extends ViewPart {
 
         modulesViewer.addSelectionChangedListener(new ISelectionChangedListener(){
 
+            @Override
             public void selectionChanged( SelectionChangedEvent event ) {
                 if (!(event.getSelection() instanceof IStructuredSelection)) {
                     return;
@@ -265,6 +272,7 @@ public class OmsBoxView extends ViewPart {
         final ExperimentalFilter activeFilter = new ExperimentalFilter();
         modulesViewer.addFilter(activeFilter);
         filterActive.addSelectionListener(new SelectionAdapter(){
+            @Override
             public void widgetSelected( SelectionEvent event ) {
                 if (((Button) event.widget).getSelection())
                     modulesViewer.removeFilter(activeFilter);
@@ -294,12 +302,14 @@ public class OmsBoxView extends ViewPart {
             }
         }
         heapCombo.addSelectionListener(new SelectionAdapter(){
+            @Override
             public void widgetSelected( SelectionEvent e ) {
                 String item = heapCombo.getText();
                 OmsBoxPlugin.getDefault().saveHeap(Integer.parseInt(item));
             }
         });
         heapCombo.addModifyListener(new ModifyListener(){
+            @Override
             public void modifyText( ModifyEvent e ) {
                 String item = heapCombo.getText();
                 try {
@@ -327,6 +337,7 @@ public class OmsBoxView extends ViewPart {
             }
         }
         logCombo.addSelectionListener(new SelectionAdapter(){
+            @Override
             public void widgetSelected( SelectionEvent e ) {
                 String item = logCombo.getText();
                 OmsBoxPlugin.getDefault().saveLogLevel(item);
@@ -340,6 +351,7 @@ public class OmsBoxView extends ViewPart {
     }
 
     private static class ExperimentalFilter extends ViewerFilter {
+        @Override
         public boolean select( Viewer arg0, Object arg1, Object arg2 ) {
             if (arg2 instanceof ViewerFolder) {
                 return true;
@@ -360,12 +372,14 @@ public class OmsBoxView extends ViewPart {
      */
     public void relayout() {
         IRunnableWithProgress operation = new IRunnableWithProgress(){
+            @Override
             public void run( IProgressMonitor pm ) throws InvocationTargetException, InterruptedException {
                 pm.beginTask(LOADING_MODULES_FROM_LIBRARIES, IProgressMonitor.UNKNOWN);
                 HashMap<String, List<ModuleDescription>> availableModules = OmsModulesManager.getInstance().browseModules(false);
                 final List<ViewerFolder> viewerFolders = ViewerFolder.hashmap2ViewerFolders(availableModules);
 
                 Display.getDefault().syncExec(new Runnable(){
+                    @Override
                     public void run() {
                         modulesViewer.setInput(viewerFolders);
                     }
@@ -388,7 +402,7 @@ public class OmsBoxView extends ViewPart {
 
     /**
      * Runs the module currently selected in the gui.
-     * 
+     *
      * @throws Exception
      */
     public void runSelectedModule() throws Exception {
@@ -399,15 +413,16 @@ public class OmsBoxView extends ViewPart {
         }
 
         String scriptID = currentSelectedModuleGui.getModuleDescription().getName() + " "
-                + new DateTime().toString(OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS);
+                + OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS.format(new Date());
+
         handler.runModule(scriptID, script);
     }
 
     /**
      * Generates the script for the module currently selected in the gui.
-     * 
+     *
      * @return the generated script.
-     * @throws Exception 
+     * @throws Exception
      */
     public String generateScriptForSelectedModule() throws Exception {
         ScriptHandler handler = new ScriptHandler();

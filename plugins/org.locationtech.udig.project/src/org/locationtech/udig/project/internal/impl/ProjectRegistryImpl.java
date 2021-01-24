@@ -348,7 +348,7 @@ public class ProjectRegistryImpl extends EObjectImpl implements ProjectRegistry 
         }
 
         final String uriText = url.toExternalForm() + File.separatorChar
-                + ProjectRegistry.PROJECT_FILE; 
+                + ProjectRegistry.PROJECT_FILE;
         final URI uri = URI.createURI(uriText);
 
         Project project = getProject(uri);

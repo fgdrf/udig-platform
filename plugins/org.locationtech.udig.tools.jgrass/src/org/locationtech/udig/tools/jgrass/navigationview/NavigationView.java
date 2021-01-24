@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -64,10 +64,6 @@ import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.crs.DefaultGeographicCRS;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
@@ -96,22 +92,17 @@ import org.opengis.referencing.operation.TransformException;
 
 /**
  * A navigation view.
- * 
+ *
  * @author Andrea Antonello (www.hydrologis.com)
  *
  */
 public class NavigationView extends ViewPart implements SelectionListener, IMapListener, IMapCompositionListener {
-
-    private static DateTimeFormatter ISO_DATE_TIME_FORMATTER = ISODateTimeFormat.dateTime().withZone(DateTimeZone.UTC);
-
-    private static DateTimeFormatter ISO_DATE_TIME_PARSER = ISODateTimeFormat.dateTimeParser().withZone(DateTimeZone.UTC);
 
     private Image worldImage;
     private Text lowerLeftText;
     private Text upperRightText;
     private Canvas canvas;
     private Combo scaleCombo;
-    private Combo dateTimeCombo;
     private Combo verticalCombo;
 
     private DecimalFormat numFormatter = new DecimalFormat("0.00");
@@ -119,8 +110,6 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
     private Button verticalUpButton;
     private Button scaleDownButton;
     private Button scaleUpButton;
-    private Button dtUpButton;
-    private Button dtDownButton;
     private Color color;
 
     private static final String ENTER_SEARCH_STRING = "enter search string";
@@ -143,6 +132,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
 
     }
 
+    @Override
     public void createPartControl( Composite theparent ) {
 
         ScrolledComposite scrolledComposite = new ScrolledComposite(theparent, SWT.H_SCROLL | SWT.V_SCROLL);
@@ -198,15 +188,6 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
         dateTimeGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
         dateTimeGroup.setLayout(new GridLayout(3, false));
         dateTimeGroup.setText("Date and Time");
-        dtDownButton = new Button(dateTimeGroup, SWT.ARROW | SWT.DOWN);
-        dtDownButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-        dtDownButton.addSelectionListener(this);
-        dateTimeCombo = new Combo(dateTimeGroup, SWT.DROP_DOWN | SWT.BORDER | SWT.READ_ONLY);
-        dateTimeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-        dateTimeCombo.addSelectionListener(this);
-        dtUpButton = new Button(dateTimeGroup, SWT.ARROW | SWT.UP);
-        dtUpButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-        dtUpButton.addSelectionListener(this);
 
         Group verticalGroup = new Group(parent, SWT.NONE);
         verticalGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
@@ -235,10 +216,11 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
         canvas.setLayoutData(gd2);
         canvas.addPaintListener(new PaintListener(){
 
+            @Override
             public void paintControl( PaintEvent e ) {
                 Rectangle canvasBounds = canvas.getBounds();
                 Rectangle imageBounds = worldImage.getBounds();
-                int h = (int) ((float) canvasBounds.width * (float) imageBounds.height / (float) imageBounds.width);
+                int h = (int) ((float) canvasBounds.width * (float) imageBounds.height / imageBounds.width);
                 e.gc.drawImage(worldImage, 0, 0, imageBounds.width, imageBounds.height, 0, 0, canvasBounds.width, h);
 
                 IMap activeMap = ApplicationGIS.getActiveMap();
@@ -292,12 +274,12 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
                         height = 1;
                     }
 
-                    int x = (int) ((double) canvasBounds.width * west / 360.0);
-                    int y = (int) ((double) h * north / 180.0);
-                    int fw = (int) ((double) canvasBounds.width * width / 360.0);
+                    int x = (int) (canvasBounds.width * west / 360.0);
+                    int y = (int) (h * north / 180.0);
+                    int fw = (int) (canvasBounds.width * width / 360.0);
                     if (fw <= 1)
                         fw = 2;
-                    int fh = (int) ((double) h * height / 180.0);
+                    int fh = (int) (h * height / 180.0);
                     if (fh <= 1)
                         fh = 2;
                     int newy = h - y;
@@ -346,12 +328,14 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             countriesCombo.setItems(namesArray);
             countriesCombo.select(0);
             countriesCombo.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
                     int selectionIndex = countriesCombo.getSelectionIndex();
                     String item = countriesCombo.getItem(selectionIndex);
                     final String file = folderFile.getAbsolutePath() + File.separator + item + ".txt";
 
                     IRunnableWithProgress operation = new IRunnableWithProgress(){
+                        @Override
                         public void run( IProgressMonitor pm ) throws InvocationTargetException, InterruptedException {
                             try {
                                 populatePlacesMap(placesMap, file);
@@ -371,6 +355,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             addNewButton.setText("+");
             addNewButton.setToolTipText("Add a new geonames file (get it at http://download.geonames.org/export/dump/)");
             addNewButton.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
                     FileDialog fileDialog = new FileDialog(countriesCombo.getShell(), SWT.OPEN);
                     fileDialog.setFilterExtensions(new String[]{"*.txt"});
@@ -403,6 +388,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             removeButton.setText("-");
             removeButton.setToolTipText("Remove a geonames file");
             removeButton.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
                     int selectionIndex = countriesCombo.getSelectionIndex();
                     String item = countriesCombo.getItem(selectionIndex);
@@ -434,7 +420,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             placesGroup.setLayout(new GridLayout(2, false));
             placesGroup.setText("places");
 
-            placesMap = new HashMap<String, Coordinate>(1000);
+            placesMap = new HashMap<>(1000);
             populatePlacesMap(placesMap, first.getAbsolutePath());
             keySet = placesMap.keySet();
 
@@ -446,6 +432,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             searchButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
             searchButton.setText("search");
             searchButton.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
                     String text = placesText.getText();
                     if (text.length() < 3) {
@@ -455,13 +442,13 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
                         return;
                     }
 
-                    List<String> matchedList = new ArrayList<String>();
+                    List<String> matchedList = new ArrayList<>();
                     for( String name : keySet ) {
                         if (name.toLowerCase().matches(".*" + text.toLowerCase() + ".*")) {
                             matchedList.add(name);
                         }
                     }
-                    String[] matchedArray = (String[]) matchedList.toArray(new String[matchedList.size()]);
+                    String[] matchedArray = matchedList.toArray(new String[matchedList.size()]);
                     Arrays.sort(matchedArray);
                     placesCombo.setItems(matchedArray);
                     placesCombo.select(0);
@@ -476,6 +463,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             goButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
             goButton.setText("go");
             goButton.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
                     IMap map = ApplicationGIS.getActiveMap();
                     if (map.getMapLayers().size() < 1) {
@@ -516,10 +504,12 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             loadShapeButton.setLayoutData(gridData);
             loadShapeButton.setText("Load all places as feature layer");
             loadShapeButton.addSelectionListener(new SelectionAdapter(){
+                @Override
                 public void widgetSelected( SelectionEvent e ) {
 
                     IRunnableWithProgress operation = new IRunnableWithProgress(){
 
+                        @Override
                         public void run( IProgressMonitor pm ) throws InvocationTargetException, InterruptedException {
 
                             try {
@@ -584,7 +574,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
     private String[] loadGeonamesFiles() {
         File[] listFiles = folderFile.listFiles();
 
-        List<String> names = new ArrayList<String>();
+        List<String> names = new ArrayList<>();
         for( int i = 0; i < listFiles.length; i++ ) {
             String name = listFiles[i].getName();
             if (name.startsWith(".svn")) {
@@ -595,12 +585,13 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             }
             names.add(name.replaceFirst(".txt", ""));
         }
-        String[] namesArray = (String[]) names.toArray(new String[names.size()]);
+        String[] namesArray = names.toArray(new String[names.size()]);
         return namesArray;
     }
 
     private void updateData() {
         Display.getDefault().asyncExec(new Runnable(){
+            @Override
             public void run() {
                 IMap activeMap = ApplicationGIS.getActiveMap();
                 ViewportModel viewportModel = (ViewportModel) activeMap.getViewportModel();
@@ -623,7 +614,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
                 canvas.redraw();
 
                 SortedSet<Double> preferredScaleDenominators = viewportModel.getPreferredScaleDenominators();
-                Double[] scalesArray = (Double[]) preferredScaleDenominators.toArray(new Double[preferredScaleDenominators.size()]);
+                Double[] scalesArray = preferredScaleDenominators.toArray(new Double[preferredScaleDenominators.size()]);
                 String[] scales = new String[scalesArray.length];
                 for( int i = 0; i < scales.length; i++ ) {
                     scales[i] = "1:" + String.valueOf(scalesArray[i]);
@@ -633,27 +624,6 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
                 scaleCombo.setItems(scales);
                 if (scales.length == itemCount) {
                     scaleCombo.select(selectionIndex);
-                }
-
-                List<DateTime> availableTimesteps = viewportModel.getAvailableTimesteps();
-                if (availableTimesteps != null) {
-                    dateTimeCombo.setEnabled(true);
-                    dtDownButton.setEnabled(true);
-                    dtUpButton.setEnabled(true);
-                    String[] dates = new String[availableTimesteps.size()];
-                    for( int i = 0; i < dates.length; i++ ) {
-                        dates[i] = ISO_DATE_TIME_FORMATTER.print(availableTimesteps.get(i));
-                    }
-                    itemCount = dateTimeCombo.getItemCount();
-                    selectionIndex = dateTimeCombo.getSelectionIndex();
-                    dateTimeCombo.setItems(dates);
-                    if (dates.length == itemCount) {
-                        dateTimeCombo.select(selectionIndex);
-                    }
-                } else {
-                    dateTimeCombo.setEnabled(false);
-                    dtDownButton.setEnabled(false);
-                    dtUpButton.setEnabled(false);
                 }
 
                 List<Double> availableElevation = viewportModel.getAvailableElevation();
@@ -680,6 +650,7 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
         });
     }
 
+    @Override
     public void widgetSelected( SelectionEvent e ) {
         ViewportModel viewportModel = (ViewportModel) ApplicationGIS.getActiveMap().getViewportModel();
 
@@ -690,12 +661,6 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             String scaleString = item.split(":")[1];
             double scale = Double.parseDouble(scaleString);
             viewportModel.setScale(scale);
-        }
-        if (source.equals(dateTimeCombo)) {
-            int index = dateTimeCombo.getSelectionIndex();
-            String item = dateTimeCombo.getItem(index);
-            DateTime date = ISO_DATE_TIME_PARSER.parseDateTime(item);
-            viewportModel.setCurrentTimestep(date);
         }
         if (source.equals(verticalCombo)) {
             int index = verticalCombo.getSelectionIndex();
@@ -751,48 +716,30 @@ public class NavigationView extends ViewPart implements SelectionListener, IMapL
             viewportModel.setScale(scale);
             scaleCombo.select(selectionIndex);
         }
-        if (source.equals(dtDownButton)) {
-            int selectionIndex = dateTimeCombo.getSelectionIndex();
-            selectionIndex--;
-            if (selectionIndex < 0) {
-                selectionIndex = 0;
-            }
-            String item = dateTimeCombo.getItem(selectionIndex);
-            DateTime dt = ISO_DATE_TIME_PARSER.parseDateTime(item);
-            viewportModel.setCurrentTimestep(dt);
-            dateTimeCombo.select(selectionIndex);
-        }
-        if (source.equals(dtUpButton)) {
-            int selectionIndex = dateTimeCombo.getSelectionIndex();
-            selectionIndex++;
-            if (selectionIndex > dateTimeCombo.getItemCount() - 1) {
-                selectionIndex = dateTimeCombo.getItemCount() - 1;
-            }
-            String item = dateTimeCombo.getItem(selectionIndex);
-            DateTime dt = ISO_DATE_TIME_PARSER.parseDateTime(item);
-            viewportModel.setCurrentTimestep(dt);
-            dateTimeCombo.select(selectionIndex);
-        }
         updateData();
     }
 
+    @Override
     public void changed( MapEvent event ) {
         updateData();
     }
 
+    @Override
     public void changed( MapCompositionEvent event ) {
         updateData();
     }
 
+    @Override
     public void setFocus() {
         updateData();
     }
 
+    @Override
     public void widgetDefaultSelected( SelectionEvent e ) {
     }
 
     private void populatePlacesMap( HashMap<String, Coordinate> placesMap, String fileToRead ) throws FileNotFoundException,
-            IOException {
+    IOException {
         BufferedReader bR = new BufferedReader(new FileReader(fileToRead));
         String line = null;
         while( (line = bR.readLine()) != null ) {

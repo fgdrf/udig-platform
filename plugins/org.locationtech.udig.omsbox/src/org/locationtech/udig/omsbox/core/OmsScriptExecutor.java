@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -19,23 +19,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import oms3.CLI;
-
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.Platform;
-import org.joda.time.DateTime;
-
 import org.locationtech.udig.omsbox.OmsBoxPlugin;
 import org.locationtech.udig.omsbox.utils.OmsBoxConstants;
 
+import oms3.CLI;
+
 /**
  * Executor of OMS scripts.
- * 
+ *
  * @author Andrea Antonello (www.hydrologis.com)
  */
 @SuppressWarnings("nls")
@@ -45,7 +44,7 @@ public class OmsScriptExecutor {
 
     private boolean isRunning = false;
 
-    List<IProcessListener> listeners = new ArrayList<IProcessListener>();
+    List<IProcessListener> listeners = new ArrayList<>();
 
     private String javaFile;
 
@@ -66,11 +65,11 @@ public class OmsScriptExecutor {
 
     /**
      * Execute an OMS script.
-     * 
+     *
      * @param script the script file or the script string.
      * @param internalStream
      * @param errorStream
-     * @param loggerLevelGui the log level as presented in the GUI, can be OFF|ON. This is not the OMS logger level, which 
+     * @param loggerLevelGui the log level as presented in the GUI, can be OFF|ON. This is not the OMS logger level, which
      *                              in stead has to be picked from the {@link OmsBoxConstants#LOGLEVELS_MAP}.
      * @param ramLevel the heap size to use in megabytes.
      * @return the process.
@@ -115,7 +114,7 @@ public class OmsScriptExecutor {
         if (!omsTmp.exists())
             omsTmp.mkdirs();
 
-        List<String> arguments = new ArrayList<String>();
+        List<String> arguments = new ArrayList<>();
         arguments.add(javaFile);
 
         // ram usage
@@ -180,7 +179,8 @@ public class OmsScriptExecutor {
         // environment.put("CLASSPATH", classPath);
 
         final Process process = processBuilder.start();
-        internalStream.println("Process started: " + new DateTime().toString(OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS));
+        internalStream.println("Process started: "
+                + OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS.format(new Date()));
         internalStream.println("");
 
         // command launched
@@ -221,6 +221,7 @@ public class OmsScriptExecutor {
         isRunning = true;
 
         new Thread(){
+            @Override
             public void run() {
                 BufferedReader br = null;
                 try {
@@ -247,11 +248,12 @@ public class OmsScriptExecutor {
                 internalStream.println("");
                 internalStream.println("");
                 internalStream.println("Process finished: "
-                        + new DateTime().toString(OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS));
+                        + OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS.format(new Date()));
             };
         }.start();
 
         new Thread(){
+            @Override
             public void run() {
                 BufferedReader br = null;
                 try {
@@ -261,8 +263,8 @@ public class OmsScriptExecutor {
                     String line;
                     while( (line = br.readLine()) != null ) {
                         /*
-                         * remove of ugly recurring geotools warnings. Not nice, but 
-                         * at least users do not get confused. 
+                         * remove of ugly recurring geotools warnings. Not nice, but
+                         * at least users do not get confused.
                          */
                         if (ConsoleMessageFilter.doRemove(line)) {
                             continue;

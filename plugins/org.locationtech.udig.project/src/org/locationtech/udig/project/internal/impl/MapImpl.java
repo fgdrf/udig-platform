@@ -1685,21 +1685,21 @@ public class MapImpl extends EObjectImpl implements Map {
                         try {
                             command.run(monitor);
                         } catch (Exception e) {
-                            ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e); 
+                            ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e);
                         }
                     }
 
                 });
             } catch (InvocationTargetException e) {
-                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e); 
+                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e);
             } catch (InterruptedException e) {
-                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e); 
+                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e);
             }
         } else {
             try {
                 command.run(new NullProgressMonitor());
             } catch (Exception e) {
-                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e); 
+                ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e);
             }
         }
     }
@@ -1714,7 +1714,7 @@ public class MapImpl extends EObjectImpl implements Map {
                 try {
                     command.run(monitor);
                 } catch (Exception e) {
-                    ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e); 
+                    ProjectPlugin.log(ERROR_EXECUTING_COMMAND + command.getName(), e);
                 }
             }
 

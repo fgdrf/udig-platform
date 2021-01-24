@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,10 +12,6 @@ package org.locationtech.udig.tools.jgrass.coverageexport;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
-import org.locationtech.udig.catalog.IGeoResource;
-import org.locationtech.udig.ui.ExceptionDetailsDialog;
-import org.locationtech.udig.ui.PlatformGIS;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -36,16 +32,16 @@ import org.geotools.gce.geotiff.GeoTiffFormat;
 import org.geotools.gce.geotiff.GeoTiffWriteParams;
 import org.geotools.gce.geotiff.GeoTiffWriter;
 import org.geotools.referencing.CRS;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.locationtech.udig.catalog.IGeoResource;
+import org.locationtech.udig.tools.jgrass.JGrassToolsPlugin;
+import org.locationtech.udig.ui.ExceptionDetailsDialog;
+import org.locationtech.udig.ui.PlatformGIS;
 import org.opengis.coverage.grid.GridCoverage;
 import org.opengis.parameter.GeneralParameterValue;
 import org.opengis.parameter.ParameterValueGroup;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.opengis.referencing.operation.MathTransform;
-
-import org.locationtech.udig.tools.jgrass.JGrassToolsPlugin;
 
 /**
  * @author Andrea Antonello (www.hydrologis.com)
@@ -54,12 +50,12 @@ public class TiffAsciiExportWizard extends Wizard implements IExportWizard {
 
     public static boolean canFinish = false;
     private TiffAsciiExportWizardPage mainPage;
-    public static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMddHHmm"); //$NON-NLS-1$
 
     public TiffAsciiExportWizard() {
         super();
     }
 
+    @Override
     public void init( IWorkbench workbench, IStructuredSelection selection ) {
         setWindowTitle("Coverage export");
         setDefaultPageImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(JGrassToolsPlugin.PLUGIN_ID,
@@ -69,17 +65,20 @@ public class TiffAsciiExportWizard extends Wizard implements IExportWizard {
         mainPage = new TiffAsciiExportWizardPage();
     }
 
+    @Override
     public void addPages() {
         super.addPages();
         addPage(mainPage);
     }
 
+    @Override
     public boolean performFinish() {
         /*
          * run with backgroundable progress monitoring
          */
         IRunnableWithProgress operation = new IRunnableWithProgress(){
 
+            @Override
             public void run( IProgressMonitor pm ) throws InvocationTargetException, InterruptedException {
 
                 IGeoResource geoResource = mainPage.getGeoResource();
@@ -176,6 +175,7 @@ public class TiffAsciiExportWizard extends Wizard implements IExportWizard {
         return true;
     }
 
+    @Override
     public boolean canFinish() {
         return super.canFinish() && canFinish;
     }
@@ -199,7 +199,7 @@ public class TiffAsciiExportWizard extends Wizard implements IExportWizard {
             paramWrite.parameter(AbstractGridFormat.GEOTOOLS_WRITE_PARAMS.getName().toString()).setValue(wp);
             File dumpFile = new File(newFilePath + ".tif");
             GeoTiffWriter gtw = (GeoTiffWriter) format.getWriter(dumpFile);
-            gtw.write(coverage2D, (GeneralParameterValue[]) paramWrite.values().toArray(new GeneralParameterValue[1]));
+            gtw.write(coverage2D, paramWrite.values().toArray(new GeneralParameterValue[1]));
         }
         if (isAscii) {
             final ArcGridFormat format = new ArcGridFormat();
@@ -211,7 +211,7 @@ public class TiffAsciiExportWizard extends Wizard implements IExportWizard {
             paramWrite.parameter(AbstractGridFormat.GEOTOOLS_WRITE_PARAMS.getName().toString()).setValue(wp);
             File dumpFile = new File(newFilePath + ".asc");
             ArcGridWriter gtw = (ArcGridWriter) format.getWriter(dumpFile);
-            gtw.write(coverage2D, (GeneralParameterValue[]) paramWrite.values().toArray(new GeneralParameterValue[1]));
+            gtw.write(coverage2D, paramWrite.values().toArray(new GeneralParameterValue[1]));
         }
     }
 }

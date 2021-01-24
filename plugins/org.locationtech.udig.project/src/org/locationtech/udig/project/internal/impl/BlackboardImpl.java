@@ -197,7 +197,7 @@ public class BlackboardImpl extends EObjectImpl implements Blackboard {
      * @see org.locationtech.udig.project.IBlackboard#get(java.lang.String)
      */
     @Override
-    @SuppressWarnings("unchecked") 
+    @SuppressWarnings("unchecked")
     public Object get(String key) {
         if (!initialized) {
             initialize();
@@ -230,7 +230,7 @@ public class BlackboardImpl extends EObjectImpl implements Blackboard {
                     }
                 } catch (Exception e) {
                     String msg = "Error loading content: " + entry.getObjectClass(); //$NON-NLS-1$
-                    IStatus status = new Status(IStatus.WARNING, ProjectPlugin.ID, 0, msg, e); 
+                    IStatus status = new Status(IStatus.WARNING, ProjectPlugin.ID, 0, msg, e);
                     ProjectPlugin.getPlugin().getLog().log(status);
                 }
 

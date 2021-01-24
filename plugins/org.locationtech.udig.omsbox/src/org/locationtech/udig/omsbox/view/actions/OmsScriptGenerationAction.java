@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,24 +10,21 @@
 package org.locationtech.udig.omsbox.view.actions;
 
 import java.io.File;
-
-import org.locationtech.udig.ui.ExceptionDetailsDialog;
+import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
-import org.joda.time.DateTime;
-
 import org.locationtech.udig.omsbox.OmsBoxPlugin;
 import org.locationtech.udig.omsbox.utils.OmsBoxConstants;
 import org.locationtech.udig.omsbox.view.OmsBoxView;
+import org.locationtech.udig.ui.ExceptionDetailsDialog;
 
 /**
  * @author Andrea Antonello (www.hydrologis.com)
@@ -36,10 +33,12 @@ public class OmsScriptGenerationAction implements IViewActionDelegate {
 
     private IViewPart view;
 
+    @Override
     public void init( IViewPart view ) {
         this.view = view;
     }
 
+    @Override
     public void run( IAction action ) {
         if (view instanceof OmsBoxView) {
             OmsBoxView omsView = (OmsBoxView) view;
@@ -53,7 +52,7 @@ public class OmsScriptGenerationAction implements IViewActionDelegate {
                     File tempFile = File.createTempFile("omsbox_", ".oms");
                     if (tempFile == null || !tempFile.exists() || tempFile.getAbsolutePath() == null) {
                         // try with user's home folder
-                        String ts = new DateTime().toString(OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS);
+                        String ts = OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS.format(new Date());
                         String userHomePath = System.getProperty("user.home"); //$NON-NLS-1$
 
                         File userHomeFile = new File(userHomePath);
@@ -90,6 +89,7 @@ public class OmsScriptGenerationAction implements IViewActionDelegate {
         }
     }
 
+    @Override
     public void selectionChanged( IAction action, ISelection selection ) {
     }
 

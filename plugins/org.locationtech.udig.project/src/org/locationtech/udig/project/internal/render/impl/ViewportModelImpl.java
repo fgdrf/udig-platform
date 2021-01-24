@@ -49,7 +49,6 @@ import org.geotools.geometry.jts.JTS;
 import org.geotools.geometry.jts.ReferencedEnvelope;
 import org.geotools.referencing.CRS;
 import org.geotools.referencing.crs.DefaultEngineeringCRS;
-import org.joda.time.DateTime;
 import org.opengis.geometry.DirectPosition;
 import org.opengis.geometry.MismatchedDimensionException;
 import org.opengis.referencing.FactoryException;
@@ -189,36 +188,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
     protected SortedSet<Double> preferredScaleDenominators;
 
     private SortedSet<Double> defaultScaleDenominators = null;
-
-    /**
-     * The cached value of the '{@link #getAvailableTimesteps() <em>Available Timesteps</em>}' attribute list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAvailableTimesteps()
-     * @generated
-     * @ordered
-     */
-    protected EList<DateTime> availableTimesteps;
-
-    /**
-     * The default value of the '{@link #getCurrentTimestep() <em>Current Timestep</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getCurrentTimestep()
-     * @generated
-     * @ordered
-     */
-    protected static final DateTime CURRENT_TIMESTEP_EDEFAULT = null;
-
-    /**
-     * The cached value of the '{@link #getCurrentTimestep() <em>Current Timestep</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getCurrentTimestep()
-     * @generated
-     * @ordered
-     */
-    protected DateTime currentTimestep = CURRENT_TIMESTEP_EDEFAULT;
 
     /**
      * The cached value of the '{@link #getAvailableElevation() <em>Available Elevation</em>}' attribute list.
@@ -884,10 +853,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
         result.append(bounds);
         result.append(", preferredScaleDenominators: "); //$NON-NLS-1$
         result.append(preferredScaleDenominators);
-        result.append(", availableTimesteps: "); //$NON-NLS-1$
-        result.append(availableTimesteps);
-        result.append(", currentTimestep: "); //$NON-NLS-1$
-        result.append(currentTimestep);
         result.append(", availableElevation: "); //$NON-NLS-1$
         result.append(availableElevation);
         result.append(", currentElevation: "); //$NON-NLS-1$
@@ -1079,10 +1044,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
             return getRenderManagerInternal();
         case RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS:
             return getPreferredScaleDenominators();
-        case RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS:
-            return getAvailableTimesteps();
-        case RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP:
-            return getCurrentTimestep();
         case RenderPackage.VIEWPORT_MODEL__AVAILABLE_ELEVATION:
             return getAvailableElevation();
         case RenderPackage.VIEWPORT_MODEL__CURRENT_ELEVATION:
@@ -1123,13 +1084,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
             return;
         case RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS:
             setPreferredScaleDenominators((SortedSet<Double>) newValue);
-            return;
-        case RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS:
-            getAvailableTimesteps().clear();
-            getAvailableTimesteps().addAll((Collection<? extends DateTime>) newValue);
-            return;
-        case RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP:
-            setCurrentTimestep((DateTime) newValue);
             return;
         case RenderPackage.VIEWPORT_MODEL__AVAILABLE_ELEVATION:
             getAvailableElevation().clear();
@@ -1174,12 +1128,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
         case RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS:
             setPreferredScaleDenominators((SortedSet<Double>) null);
             return;
-        case RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS:
-            getAvailableTimesteps().clear();
-            return;
-        case RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP:
-            setCurrentTimestep(CURRENT_TIMESTEP_EDEFAULT);
-            return;
         case RenderPackage.VIEWPORT_MODEL__AVAILABLE_ELEVATION:
             getAvailableElevation().clear();
             return;
@@ -1220,11 +1168,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
             return renderManagerInternal != null;
         case RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS:
             return preferredScaleDenominators != null;
-        case RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS:
-            return availableTimesteps != null && !availableTimesteps.isEmpty();
-        case RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP:
-            return CURRENT_TIMESTEP_EDEFAULT == null ? currentTimestep != null
-                    : !CURRENT_TIMESTEP_EDEFAULT.equals(currentTimestep);
         case RenderPackage.VIEWPORT_MODEL__AVAILABLE_ELEVATION:
             return availableElevation != null && !availableElevation.isEmpty();
         case RenderPackage.VIEWPORT_MODEL__CURRENT_ELEVATION:
@@ -1353,45 +1296,6 @@ public class ViewportModelImpl extends EObjectImpl implements ViewportModel {
             eNotify(new ENotificationImpl(this, Notification.SET,
                     RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS,
                     oldPreferredScaleDenominators, preferredScaleDenominators));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public List<DateTime> getAvailableTimesteps() {
-        if (availableTimesteps == null) {
-            availableTimesteps = new EDataTypeUniqueEList<DateTime>(DateTime.class, this,
-                    RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS);
-        }
-        return availableTimesteps;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public DateTime getCurrentTimestep() {
-        return currentTimestep;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void setCurrentTimestep(DateTime newCurrentTimestep) {
-        DateTime oldCurrentTimestep = currentTimestep;
-        currentTimestep = newCurrentTimestep;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET,
-                    RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP, oldCurrentTimestep,
-                    currentTimestep));
     }
 
     /**

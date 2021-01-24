@@ -11,7 +11,6 @@ import java.util.List;
 import org.locationtech.udig.project.internal.provider.ProjectEditPlugin;
 import org.locationtech.udig.project.internal.render.RenderPackage;
 import org.locationtech.udig.project.internal.render.ViewportModel;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
@@ -212,38 +211,6 @@ public class ViewportModelItemProvider extends ItemProviderAdapter
     }
 
     /**
-     * This adds a property descriptor for the Available Timesteps feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addAvailableTimestepsPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(
-                ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-                getResourceLocator(), getString("_UI_ViewportModel_availableTimesteps_feature"), //$NON-NLS-1$
-                getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
-                        "_UI_ViewportModel_availableTimesteps_feature", "_UI_ViewportModel_type"), //$NON-NLS-1$ //$NON-NLS-2$
-                RenderPackage.Literals.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS, true, false, false,
-                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-    }
-
-    /**
-     * This adds a property descriptor for the Current Timestep feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addCurrentTimestepPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add(createItemPropertyDescriptor(
-                ((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-                getResourceLocator(), getString("_UI_ViewportModel_currentTimestep_feature"), //$NON-NLS-1$
-                getString("_UI_PropertyDescriptor_description", //$NON-NLS-1$
-                        "_UI_ViewportModel_currentTimestep_feature", "_UI_ViewportModel_type"), //$NON-NLS-1$ //$NON-NLS-2$
-                RenderPackage.Literals.VIEWPORT_MODEL__CURRENT_TIMESTEP, true, false, false,
-                ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
-    }
-
-    /**
      * This adds a property descriptor for the Available Elevation feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -326,8 +293,6 @@ public class ViewportModelItemProvider extends ItemProviderAdapter
         case RenderPackage.VIEWPORT_MODEL__ASPECT_RATIO:
         case RenderPackage.VIEWPORT_MODEL__PIXEL_SIZE:
         case RenderPackage.VIEWPORT_MODEL__PREFERRED_SCALE_DENOMINATORS:
-        case RenderPackage.VIEWPORT_MODEL__AVAILABLE_TIMESTEPS:
-        case RenderPackage.VIEWPORT_MODEL__CURRENT_TIMESTEP:
         case RenderPackage.VIEWPORT_MODEL__AVAILABLE_ELEVATION:
         case RenderPackage.VIEWPORT_MODEL__CURRENT_ELEVATION:
             fireNotifyChanged(

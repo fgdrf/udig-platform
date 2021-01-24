@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Date;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
@@ -23,8 +24,6 @@ import org.eclipse.ui.IViewActionDelegate;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
-import org.joda.time.DateTime;
-
 import org.locationtech.udig.omsbox.OmsBoxPlugin;
 import org.locationtech.udig.omsbox.core.IProcessListener;
 import org.locationtech.udig.omsbox.core.JConsoleOutputConsole;
@@ -40,10 +39,12 @@ public class OmsScriptExecutionAction implements IViewActionDelegate, IProcessLi
     private IViewPart view;
     private String scriptID;
 
+    @Override
     public void init( IViewPart view ) {
         this.view = view;
     }
 
+    @Override
     public void run( IAction action ) {
         if (view instanceof OmsBoxView) {
             // OmsBoxView omsView = (OmsBoxView) view;
@@ -83,7 +84,8 @@ public class OmsScriptExecutionAction implements IViewActionDelegate, IProcessLi
             Process process = executor.exec(path, internalStream, errorStream, loggerLevelGui, ramLevel);
 
             File scriptFile = new File(path);
-            scriptID = scriptFile.getName() + " " + new DateTime().toString(OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS);
+            scriptID = scriptFile.getName() + " "
+                    + OmsBoxConstants.dateTimeFormatterYYYYMMDDHHMMSS.format(new Date());
             OmsBoxPlugin.getDefault().addProcess(process, scriptID);
 
             // cleanup when leaving uDig
@@ -92,7 +94,8 @@ public class OmsScriptExecutionAction implements IViewActionDelegate, IProcessLi
             e.printStackTrace();
         }
     }
-    
+
+    @Override
     public void selectionChanged( IAction action, ISelection selection ) {
     }
 
@@ -103,10 +106,10 @@ public class OmsScriptExecutionAction implements IViewActionDelegate, IProcessLi
 
     /**
      * Read text from a file in one line.
-     * 
+     *
      * @param file the file to read.
      * @return the read string.
-     * @throws IOException 
+     * @throws IOException
      */
     public static String readFile( File file ) throws IOException {
         BufferedReader br = null;

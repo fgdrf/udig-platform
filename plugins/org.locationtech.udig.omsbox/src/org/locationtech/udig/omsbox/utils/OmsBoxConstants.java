@@ -1,6 +1,6 @@
 /*
  * uDig - User Friendly Desktop Internet GIS client
- * (C) HydroloGIS - www.hydrologis.com 
+ * (C) HydroloGIS - www.hydrologis.com
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,10 +9,10 @@
  */
 package org.locationtech.udig.omsbox.utils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 public class OmsBoxConstants {
     public static final String CATEGORY_OTHERS = "Others";
@@ -38,13 +38,12 @@ public class OmsBoxConstants {
     public static final String STATISTICS = "Statistics";
 
     public static String dateTimeFormatterYYYYMMDDHHMMSS_string = "yyyy-MM-dd HH:mm:ss";
-    public static DateTimeFormatter dateTimeFormatterYYYYMMDDHHMMSS = DateTimeFormat
-            .forPattern(dateTimeFormatterYYYYMMDDHHMMSS_string);
+    public static DateFormat dateTimeFormatterYYYYMMDDHHMMSS = new SimpleDateFormat(dateTimeFormatterYYYYMMDDHHMMSS_string);
 
     public static String LOGLEVEL_GUI_ON = "ON";
     public static String LOGLEVEL_GUI_OFF = "OFF";
     public static String[] LOGLEVELS_GUI = {LOGLEVEL_GUI_OFF, LOGLEVEL_GUI_ON};
-    public static HashMap<String, String> LOGLEVELS_MAP = new HashMap<String, String>(2);
+    public static HashMap<String, String> LOGLEVELS_MAP = new HashMap<>(2);
     static {
         LOGLEVELS_MAP.put(LOGLEVEL_GUI_OFF, "OFF");
         LOGLEVELS_MAP.put(LOGLEVEL_GUI_ON, "ALL");
@@ -82,7 +81,7 @@ public class OmsBoxConstants {
 
     /**
      * Key used to set and retrieve the grass installation location.
-     * 
+     *
      * <p>Example on linux: /usr/lib/grass64
      */
     public static String GRASS_ENVIRONMENT_GISBASE_KEY = "jgt-grass.gisbase";

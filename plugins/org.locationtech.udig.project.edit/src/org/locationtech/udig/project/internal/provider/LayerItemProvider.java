@@ -495,7 +495,7 @@ public class LayerItemProvider extends ItemProviderAdapter
             image = ImageDescriptor.createWithFlags(image, outOfScaleModifier);
         }
 
-        return image; 
+        return image;
     }
 
     /**

@@ -387,8 +387,7 @@ public class LayerFactoryImpl extends EObjectImpl implements LayerFactory {
         LayerResource preferredResource = null;
         for (IResolve resolve : resolves) {
             if (resolve instanceof IGeoResource) {
-                LayerResource layerResource = new LayerResource(layer,
-                        (IGeoResource) resolve);
+                LayerResource layerResource = new LayerResource(layer, (IGeoResource) resolve);
                 if (resolve.getID().equals(layerResourceID)) {
                     resources.add(0, layerResource);
                 } else {

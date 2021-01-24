@@ -1196,7 +1196,7 @@ public class ProjectFactoryImpl extends EFactoryImpl implements ProjectFactory {
 
     private void runMapCreationInterceptors(Map map) {
         List<IConfigurationElement> interceptors = ExtensionPointList
-                .getExtensionPointList(MapInterceptor.MAP_INTERCEPTOR_EXTENSIONPOINT); 
+                .getExtensionPointList(MapInterceptor.MAP_INTERCEPTOR_EXTENSIONPOINT);
         for (IConfigurationElement element : interceptors) {
             if (!"mapCreation".equals(element.getName())) //$NON-NLS-1$
                 continue;
@@ -1215,7 +1215,7 @@ public class ProjectFactoryImpl extends EFactoryImpl implements ProjectFactory {
      *      java.lang.String, java.util.List)
      */
     @Override
-    @SuppressWarnings("unchecked") 
+    @SuppressWarnings("unchecked")
     public Map createMap(Project owner, String name, List layers) {
         Map map = createMap();
 
